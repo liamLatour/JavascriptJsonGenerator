@@ -1,0 +1,78 @@
+a{
+    text-decoration: none;
+    padding: 14px 25px;
+    background-color: lightgreen;
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    color: black;
+    font: 20px;
+}
+a:hover{
+    background-color: greenyellow;
+}
+h2{
+    background-color: rgb(7, 72, 156);
+    color: white;
+}
+#settime{
+    display: block;
+}
+.form-style-1 {
+    margin:10px auto;
+    max-width: 800px;
+    padding: 20px 12px 10px 20px;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-1 li {
+    padding: 0;
+    display: block;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+#manual{
+    display: none;
+}
+#alarm{
+    display: none;
+}
+button{
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    background-color: lightgreen;
+    font-size: 20px;
+}
+button:hover {
+    background-color: greenyellow;
+}
+button:active {
+    background-color: rgb(131, 194, 37);
+}
+.form-style-1 #name{
+    margin:0 0 3px 0;
+    padding:0px;
+    display:inline;
+    font-weight: bold;
+    position: absolute;
+    left: 25%;
+}
+.form-style-1 #value{
+    margin:0 0 3px 0;
+    padding:0px;
+    display:inline;
+    font-weight: bold;
+    position: absolute;
+    right: 25%;
+    /*
+    font-weight: bold;
+    position: absolute;*/
+}
+.form-style-1 input{
+    margin:0 0 3px 0;
+    padding:0px;
+    display:inline;
+    font-weight: bold;
+    position: relative;
+    left: 20%;
+}

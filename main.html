@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="info.css">
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="content" align="center">
+        <ul class="form-style-1">
+            <!--General-->
+                <h2>General</h2>
+            <li>
+                <label id="name">Nom du noeud</label>
+                <input id="nom" type="text"/>
+            </li>
+            <li>
+                <label id="name">Verbose</label>
+                <input id="verbose" type="checkbox" name"gender" value="1"> 
+            </li>
+            <li>
+                <label id="name">LED</label>
+                <input id="led" type="checkbox" name"gender" value="1" checked="checked">        
+            </li>
+            <li>
+                <label id="name">Watchdog</label>
+                <input id="watchdog" type="checkbox" name"gender" value="1">        
+            </li>
+            <li>
+                <label id="name">Debug en Série</label>
+                <input id="debug" type="checkbox" name"gender" value="1">        
+            </li>
+
+            <!--Network-->
+            <h2>Réseau</h2>
+            <li>
+                <label id="name">Type de réseau</label>
+                <input id="typenet" type="text" value="LoRaWAN"/>
+            </li>
+            <li>
+                <label id="name">DevEUI</label>
+                <input id="deveui" type="text"/>
+            </li>
+            <li>
+                <label id="name">AppEUI</label>
+                <input id="appeui" type="text"/>
+            </li>
+            <li>
+                <label id="name">AppKey</label>
+                <input id="appkey" type="text"/>
+            </li>
+            <li>
+                <label id="name">Période en Seconde</label>
+                <input id="periodsec" type="range" min="3600" max="36000" value="1200" oninput="updateTextInput(this);"/>
+                <label id="value">1200</label>
+            </li>
+            <li>
+                <label id="name">Utiliser un DataRate adaptatif</label>
+                <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);">        
+            </li>
+            <li id="data">
+                <label id="name">DataRate</label>
+                <input id="datarate" type="range" min="1" max="20" value="10" oninput="updateTextInput(this);"/>
+                <label id="value">10</label>
+            </li>
+
+            <!--Sensors-->
+            <h2>Sensors</h2>
+            <div id="sensors">
+
+            </div>
+            <li>
+                <button type="button" onclick="addSens()">+</button>
+                <button type="button" onclick="supSens()">-</button> 
+            </li>
+
+            <!--Interupts-->
+            <h2>Interuptions</h2>
+            <div id="interuptions">
+
+            </div>
+            <li>
+                <button type="button" onclick="addInt()">+</button>
+                <button type="button" onclick="supInt()">-</button> 
+            </li>
+
+            <!--Time-->
+            <h2>Temps</h2>
+            <li>
+                <label id="name">Synchronisation GPS</label>
+                <input id="syncGPS" type="checkbox" name"gender" value="1" checked="checked" onchange="updateGPS(this);">        
+            </li>
+            <div id="GPS">
+                <li>
+                    <label id="name">Timeout en Seconde</label>
+                    <input id="timeout" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
+                    <label id="value">250</label>
+                </li>
+                <li>
+                    <label id="name">Temps entre synchronisations</label>
+                    <input id="syncperiodsec" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
+                    <label id="value">250</label>
+                </li>
+            </div>
+            <div id="manual">
+                <li>
+                    <label id="name">Manual UTC</label>
+                    <input id="datePicker" type="date"/>
+                    <input id="settime" type="time" step="1"/>
+                </li>
+            </div>
+
+
+            <a id="download" href="#">Générer le lien</a>
+            <div id="container"></div>
+        </ul>
+    </div>
+
+    <script>
+        //ajoute un sensor
+        function addSens(){
+            $('<div id="sensor" class="sens">\
+                    <li>\
+                        <label id="name">Nom du capteur</label>\
+                        <input id="sensname" type="text"/>\
+                    </li>\
+                    <li>\
+                        <label id="name">Type</label>\
+                        <input id="senstype" type="text"/>\
+                    </li>\
+                    <li>\
+                        <label id="name">Period en Second</label>\
+                        <input id="sensperiod" type="range" min="100" max="500" value="250" oninput="updateTextInput(this);"/>\
+                        <label id="value">250</label>\
+                    </li>\
+                    <li>\
+                        <label id="name">Interrupt Channel(s)</label>\
+                        <input id="sensint" type="text"/>\
+                    </li>\
+                    <li>\
+                        <label id="name">Envoyer quand Interruption</label>\
+                        <input id="senssend" type="checkbox" name"gender" value="1">\
+                    </li>\
+                    <li>\
+                        <label id="name">Alarm</label>\
+                        <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">\
+                    </li>\
+                    \
+                    <div id="alarm">\
+                        <li>\
+                            <label id="name">Send on alarm set</label>\
+                            <input id="alarmset" type="checkbox" name"gender" value="1">\
+                        </li>\
+                        <li>\
+                            <label id="name">Send on cleared set</label>\
+                            <input id="alarmcleared" type="checkbox" name"gender" value="1">\
+                        </li>\
+                        <li>\
+                            <label id="name">Threshold Set per minute</label>\
+                            <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
+                            <label id="value">7</label>\
+                        </li>\
+                        <li>\
+                            <label id="name">Threshold Clear per minute</label>\
+                            <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
+                            <label id="value">7</label>\
+                        </li>\
+                    </div>\
+                    <hr>\
+                </div>').appendTo("#sensors");
+        }
+
+        //ajoute une interruption
+        function addInt(){
+            $('<div id="int" class="interupt">\
+                    <li>\
+                        <label id="name">Nom de/des interuption(s)</label>\
+                        <input id="intname" type="text"/>\
+                    </li>\
+                    <li>\
+                        <label id="name">Debounce Ms</label>\
+                        <input id="intdeb" type="range" min="10" max="1000" value="500" oninput="updateTextInput(this);"/>\
+                        <label id="value">7</label>\
+                    </li>\
+                    <hr>\
+                </div>').appendTo("#interuptions");
+        }
+
+        //enlever un sensor
+        function supSens(){
+            $("#sensors #sensor").last().remove();
+        }
+
+        //enlever une interuption
+        function supInt(){
+            $("#interuptions #int").last().remove();
+        }
+
+        //Rempli la date au bon fuseau horaire
+        Date.prototype.toDateInputValue = (function() {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0,10);
+        });
+
+        document.getElementById('datePicker').value = new Date().toDateInputValue();
+
+        //Pour la visualisation des sliders
+        function updateTextInput(el) {
+            $(el).next().html(el.value);
+        }
+
+        //Pour la partie GPS
+        function updateGPS(el) {
+            if($(el).is(":checked")){
+                document.getElementById("manual").style.display = 'none';
+                document.getElementById("GPS").style.display = 'inline';
+            }
+            else{
+                document.getElementById("manual").style.display = 'block';
+                document.getElementById("GPS").style.display = 'none';
+            }
+        }
+
+        //Pour la partie Datarate
+        function updateDatarate(el) {
+            if($(el).is(":checked")){
+                document.getElementById("data").style.display = 'none';
+            }
+            else{
+                document.getElementById("data").style.display = 'block';
+            }
+        }
+
+        //Pour la partie Alarm des sensors
+        function updateSens(el) {
+            if($(el).is(":checked")){
+                $(el).parent().next("#alarm").css('display', 'block');
+            }
+            else{
+                $(el).parent().next("#alarm").css('display', 'none');
+            }
+        }
+
+        //Genère le fichier Json dans le 'div' précedemment vide
+        window.onload = function() {
+            var a = document.getElementById("download");
+            a.onclick = function() {
+                //variables pour les champs fixent
+                var name = document.getElementById('nom').value;
+                var verbose = $("#verbose").is(":checked");
+                var led = $("#led").is(":checked");
+                var watchdog = $("#watchdog").is(":checked");
+                var debugSerial = $("#debug").is(":checked");
+
+                var type = document.getElementById('typenet').value;
+                var devEUI = document.getElementById('deveui').value;
+                var appEUI = document.getElementById('appeui').value;
+                var appKey = document.getElementById('appkey').value;
+                var periodSec = parseInt(document.getElementById('periodsec').value);
+                var dataRate = parseInt(document.getElementById('datarate').value);
+                var useAdaptativeDataRate = $("adaptData").is(":checked");
+
+                var syncGPS = $("syncGPS").is(":checked");
+                var syncGPSTimeoutSec = parseInt(document.getElementById('timeout').value);
+                var syncPeriodSec = parseInt(document.getElementById('syncperiodsec').value);
+                //récupère la date en entié puis la sépare
+                var date = document.getElementById('datePicker').value.split('-');
+                var year = parseInt(date[0]);
+                var month = parseInt(date[1]);
+                var day = parseInt(date[2]);
+                //récupère le moment exact puis le sépare
+                var moment = document.getElementById('settime').value.split(':');
+                var hours = parseInt(moment[0]);
+                var minutes = parseInt(moment[1]);
+                var seconds = parseInt(moment[2]);
+
+                var obj = {"name": name, 
+                            "verbose": verbose,
+                            "led": led,
+                            "watchdog": watchdog,
+                            "debugSerial": debugSerial,
+
+                            "network": {
+                                "type": type,
+                                "devEUI": devEUI,
+                                "appEUI": appEUI,
+                                "appKey": appKey,
+                                "periodSec": periodSec,
+                                "dataRate": dataRate,
+                                "useAdaptativeDataRate": useAdaptativeDataRate
+                            },
+
+                            "time": {
+                                "syncGPS": syncGPS,
+                                "syncGPSTimeoutSec": syncGPSTimeoutSec,
+                                "syncPeriodSec": syncPeriodSec,
+                                "manualUTC": {
+                                    "year": year,
+                                    "month": month,
+                                    "day": day,
+                                    "hours": hours,
+                                    "minutes": minutes,
+                                    "seconds": seconds
+                                }
+                            }
+                        };
+
+                //Remplis la liste d'interuption
+                var inters = document.getElementsByClassName("interupt");
+                if(inters.length>0){
+                    obj["interruptions"] = [];
+                    for(var i=0; i<inters.length; i++){
+                        var intname = $(inters[i]).find('#intname').val();
+                        var intdeb = parseInt($(inters[i]).find('#intdeb').val());
+
+                        var intnames = intname.split(" ");
+
+                        if(intnames.length < 2){
+                            obj["interruptions"].push({"name": intname, "debounceMs": intdeb});
+                        }
+                        else{
+                            var tempobj = [];
+                            for(var j=0; j<intnames.length; j++){
+                                tempobj.push(intnames[j]);
+                            }
+                            obj["interruptions"].push({"names": tempobj, "debounceMs": intdeb});
+                        }
+                    }
+                }
+
+                //Remplis les sensors
+                var sens = document.getElementsByClassName("sens");
+                if(sens.length>0){
+                    obj["sensors"] = [];
+                    for(var i=0; i<sens.length; i++){
+                        var sensname = $(sens[i]).find('#sensname').val();
+                        var senstype = $(sens[i]).find('#senstype').val();
+                        var sensperiod = parseInt($(sens[i]).find('#sensperiod').val());
+                        var sensint = $(sens[i]).find('#sensint').val();
+                        var senssend = $(sens[i]).find('#senssend').is(":checked");
+                        var sensalarm = $(sens[i]).find('#sensalarm').is(":checked"); //d'autre var mais après
+                        
+                        var tempobj = {"name": sensname,
+                                        "type": senstype,
+                                        "periodSec": sensperiod,
+                                        "sendOnInterrupt": senssend
+                                        };
+                        
+                        if(sensalarm){
+                            var alarmset = $(sens[i]).find('#alarmset').is(":checked");
+                            var alarmcleared = $(sens[i]).find('#alarmcleared').is(":checked");
+                            var thresholdset = parseInt($(sens[i]).find('#thresholdset').val());
+                            var thresholdclear = parseInt($(sens[i]).find('#thresholdclear').val());
+
+                            tempobj["alarm"] = {"sendOnAlarmSet": alarmset,
+                                                "sendOnAlarmCleared": alarmcleared,
+                                                "thresholdSetMMPerMinute": thresholdset,
+                                                "thresholdClearMMPerMinute": thresholdclear
+                                                };
+                        }
+
+                        if(sensint.length > 0){
+                            var sensints = sensint.split(" ");
+
+                            if(sensints.length < 2){
+                                tempobj["interruptChannel"] = sensint;
+                            }
+                            else{
+                                var tempints = [];
+                                for(var j=0; j<sensints.length; j++){
+                                    tempints.push(sensints[j]);
+                                }
+                                tempobj["interruptChannel"] = tempints;
+                            }
+                        }
+
+                        obj["sensors"].push(tempobj);
+                    }
+                }
+
+                var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+
+                $("#generatedLink").remove();
+                $('<a id="generatedLink" href="data:' + data + '" download="config.json">Télécharger JSON</a>').appendTo('#container');
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html> 
