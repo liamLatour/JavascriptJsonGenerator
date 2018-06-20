@@ -12,7 +12,7 @@
         <!--General-->
             <h2>General</h2>
         <li>
-            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud</label>
+            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud <span>*</span></label>
             <input id="nom" type="text"/>
         </li>
         <li>
@@ -36,25 +36,25 @@
         <!--Network-->
         <h2>Réseau</h2>
         <li>
-            <label title="Indique le type de réseau utilisé" id="name">Type de réseau</label>
+            <label title="Indique le type de réseau utilisé" id="name">Type de réseau <span>*</span></label>
             <input id="typenet" type="text" value="LoRaWAN"/>
         </li>
         <li>
-            <label title="Identifiant unique du noeud" id="name">DevEUI</label>
+            <label title="Identifiant unique du noeud" id="name">DevEUI <span>*</span></label>
             <input id="deveui" type="text"/>
         </li>
         <li>
-            <label title="Identifiant d'application" id="name">AppEUI</label>
+            <label title="Identifiant d'application" id="name">AppEUI <span>*</span></label>
             <input id="appeui" type="text"/>
         </li>
         <li>
-            <label title="Clef d'authentification auprès de l'application" id="name">AppKey</label>
+            <label title="Clef d'authentification auprès de l'application" id="name">AppKey <span>*</span></label>
             <input id="appkey" type="text"/>
         </li>
         <li>
-            <label title="Temps entre deux envoies" id="name">Intervalle d'émission</label>
+            <label title="Temps entre deux envoies" id="name">Intervalle d'émission <span>*</span></label>
             <input id="periodsec" type="range" min="3600" max="36000" value="1200" oninput="updateTextInput(this);"/>
-            <label id="value">1200</label>
+            <label id="value"></label>
         </li>
         <li>
             <label title="Ajuste automatiquement le datarate" id="name">Utiliser un DataRate adaptatif</label>
@@ -62,8 +62,8 @@
         </li>
         <li id="data">
             <label title="Indique le datarate à utiliser" id="name">DataRate</label>
-            <input id="datarate" type="range" min="1" max="20" value="10" oninput="updateDatarateSlider(this);"/>
-            <label id="value">10</label>
+            <input id="datarate" type="range" min="0" max="5" value="5" oninput="updateDatarateSlider(this);"/>
+            <label id="value"></label>
         </li>
 
         <!--Sensors-->
@@ -100,12 +100,12 @@
             <li>
                 <label title="Définit le temps d'attente maximale pour obtenir une accroche GPS" id="name">Timeout en Seconde</label>
                 <input id="timeout" type="range" min="60" max="240" value="120" oninput="updateTextInput(this);"/>
-                <label id="value">250</label>
+                <label id="value"></label>
             </li>
             <li>
                 <label title="Définit la période de resynchronisation" id="name">Temps entre deux synchronisations</label>
                 <input id="syncperiodsec" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
-                <label id="value">250</label>
+                <label id="value"></label>
             </li>
         </div>
         <div id="manual">
@@ -126,76 +126,40 @@
     </ul>
 
     <script>
+        //fonction pour inclure le html
+        function includeHTML() {
+            var z, i, elmnt, file, xhttp;
+            z = document.getElementsByTagName("*");
+            for (i = 0; i < z.length; i++) {
+                elmnt = z[i];
+                file = elmnt.getAttribute("w3-include-html");
+                if (file) {
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    elmnt.removeAttribute("w3-include-html");
+                    includeHTML();
+                    }
+                }      
+                xhttp.open("GET", file, true);
+                xhttp.send();
+                return;
+                }
+            }
+            };
+
         //ajoute un sensor
         function addSens(){
-            $('<div id="sensor" class="sens">\
-                    <li>\
-                        <label title="Nom du capteur, 15 caractères maximum et unique" id="name">Nom du capteur</label>\
-                        <input id="sensname" type="text"/>\
-                    </li>\
-                    <li>\
-                        <label title="Type de capteur" id="name">Type</label>\
-                        <input id="senstype" type="text"/>\
-                    </li>\
-                    <li>\
-                        <label title="Indique le temps à attendre entre deux mesures" id="name">Temps entre deux mesures</label>\
-                        <input id="sensperiod" type="range" min="60" max="3600" value="1800" oninput="updateTextInput(this);"/>\
-                        <label id="value">250</label>\
-                    </li>\
-                    <li>\
-                        <label title="Le nom doit faire partie de la liste d\'interruptions\
-\
-\
-                        Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>\
-                        <input id="sensint" type="text"/>\
-                    </li>\
-                    <li>\
-                        <label title="Définit s\'il faut envoyer les données après une intéruption" id="name">Transmettre après mesure</label>\
-                        <input id="senssend" type="checkbox" name"gender" value="1">\
-                    </li>\
-                    <li>\
-                        <label title="Active ou pas l\'alarme" id="name">Alarm</label>\
-                        <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">\
-                    </li>\
-                    \
-                    <div id="alarm">\
-                        <li>\
-                            <label title="Indique si un envoie est déclenché lorsque l\'alarme est activée" id="name">Transmettre début alarme</label>\
-                            <input id="alarmset" type="checkbox" name"gender" value="1">\
-                        </li>\
-                        <li>\
-                            <label title="Indique si un envoie est déclenché lorsque l\'alarme est désactivée" id="name">Transmettre fin alarme</label>\
-                            <input id="alarmcleared" type="checkbox" name"gender" value="1">\
-                        </li>\
-                        <li>\
-                            <label title="" id="name">Threshold Set per minute</label>\
-                            <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
-                            <label id="value">7</label>\
-                        </li>\
-                        <li>\
-                            <label title="" id="name">Threshold Clear per minute</label>\
-                            <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
-                            <label id="value">7</label>\
-                        </li>\
-                    </div>\
-                    <hr>\
-                </div>').appendTo("#sensors");
+            $('<div w3-include-html="sensor.html" id="sensor" class="sens"></div>').appendTo("#sensors");    
+            includeHTML();
         }
 
         //ajoute une interruption
         function addInt(){
-            $('<div id="int" class="interupt">\
-                    <li>\
-                        <label title="Spécifie le(s) nom(s) des interruptions séparé par une espace" id="name">Nom de/des interuption(s)</label>\
-                        <input id="intname" type="text"/>\
-                    </li>\
-                    <li>\
-                        <label title="Temps minimale entre deux fronts montant pour être pris en compte" id="name">Anti-rebonds</label>\
-                        <input id="intdeb" type="range" min="0" max="1000" value="0" oninput="updateTextInputMS(this);"/>\
-                        <label id="value">7</label>\
-                    </li>\
-                    <hr>\
-                </div>').appendTo("#interuptions");
+            $('<div w3-include-html="interruption.html" id="int" class="interupt"></div>').appendTo("#interuptions");
+            includeHTML();
         }
 
         //enlever un sensor
@@ -225,7 +189,18 @@
             var minutes = (brut-(brut%60))/60;
             var sec = brut - minutes*60;
 
-            $(el).next().html(heure+'h '+minutes+'m '+sec+'s');
+            var display = "";
+
+            if(heure > 0){
+                display += heure+'h ';
+            }
+            if(minutes > 0){
+                display += minutes+'m ';
+            }
+
+            display += sec+'s';
+
+            $(el).next().html(display);
         }
 
         //Pour la visualisation du datarate
@@ -308,7 +283,6 @@
                             "led": led,
                             "watchdog": watchdog,
                             "debugSerial": debugSerial,
-
                             "network": {
                                 "type": type,
                                 "devEUI": devEUI,
@@ -318,7 +292,6 @@
                                 "dataRate": dataRate,
                                 "useAdaptativeDataRate": useAdaptativeDataRate
                             },
-
                             "time": {
                                 "syncGPS": syncGPS,
                                 "syncGPSTimeoutSec": syncGPSTimeoutSec,
@@ -367,7 +340,7 @@
                         var sensperiod = parseInt($(sens[i]).find('#sensperiod').val());
                         var sensint = $(sens[i]).find('#sensint').val();
                         var senssend = $(sens[i]).find('#senssend').is(":checked");
-                        var sensalarm = $(sens[i]).find('#sensalarm').is(":checked"); //d'autre var mais après
+                        var sensalarm = $(sens[i]).find('#sensalarm').is(":checked"); 
                         
                         var tempobj = {"name": sensname,
                                         "type": senstype,

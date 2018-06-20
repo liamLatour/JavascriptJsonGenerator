@@ -1,0 +1,25 @@
+<li>
+    <label title="Spécifie le(s) nom(s) des interruptions séparé par une espace" id="name">Nom de/des interuption(s) <span>*</span></label>
+    <input id="intname" type="text" list="types"/>
+    <datalist id="types">
+        <option value="SHT35_INT">
+        <option value="LPS25_INT">
+        <option value="OPT3001_INT">
+        <option value="LIS3DH_INT">
+        <option value="SPI_INT">
+        <option value="I2C_INT">
+        <option value="USART_INT">
+        <option value="SDI12_INT">
+        <option value="SDI_INT">
+        <option value="OPTO1_INT"> 
+        <option value="OPTO2_INT">
+        <option value="INT1_INT"> 
+        <option value="INT2_INT">
+    </datalist>
+</li>
+<li>
+    <label title="Temps minimale entre deux fronts montant pour être pris en compte" id="name">Anti-rebonds</label>
+    <input id="intdeb" type="range" min="0" max="1000" value="0" oninput="updateTextInputMS(this);"/>
+    <label id="value"></label>
+</li>
+<hr>

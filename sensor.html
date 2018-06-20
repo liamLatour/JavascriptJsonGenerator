@@ -1,0 +1,80 @@
+<li>
+    <label title="Nom du capteur, 15 caractères maximum, il est unique" id="name">Nom du capteur <span>*</span></label>
+    <input id="sensname" type="text"/>
+</li>
+<li>
+    <label title="Type de capteur" id="name">Type <span>*</span></label>
+    <input id="senstype" type="text" list="typesSens"/>
+    <datalist id="typesSens">
+        <option value="SHT35">
+        <option value="LPS25">
+        <option value="OPT3001">
+        <option value="LIS3DH">
+        <!--
+        <option value="SPI">
+        <option value="I2C">
+        <option value="USART">
+        <option value="SDI12">
+        <option value="SDI">
+        <option value="OPTO1"> 
+        <option value="OPTO2">
+        <option value="INT1"> 
+        <option value="INT2">
+        -->
+    </datalist>
+</li>
+<li>
+    <label title="Indique le temps à attendre entre deux mesures" id="name">Temps entre deux mesures <span>*</span></label>
+    <input id="sensperiod" type="range" min="60" max="3600" value="1800" oninput="updateTextInput(this);"/>
+    <label id="value"></label>
+</li>
+<li>
+    <label title="Le nom doit faire partie de la liste d'interruptions
+    Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>
+    <input id="sensint" type="text" list="typesInt"/>
+    <datalist id="typesInt">
+        <option value="SHT35_INT">
+        <option value="LPS25_INT">
+        <option value="OPT3001_INT">
+        <option value="LIS3DH_INT">
+        <option value="SPI_INT">
+        <option value="I2C_INT">
+        <option value="USART_INT">
+        <option value="SDI12_INT">
+        <option value="SDI_INT">
+        <option value="OPTO1_INT"> 
+        <option value="OPTO2_INT">
+        <option value="INT1_INT"> 
+        <option value="INT2_INT">
+    </datalist>
+</li>
+<li>
+    <label title="Définit s'il faut envoyer les données après une intéruption" id="name">Transmettre après mesure</label>
+    <input id="senssend" type="checkbox" name"gender" value="1">
+</li>
+<li>
+    <label title="Active ou pas l'alarme" id="name">Alarm</label>
+    <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">
+</li>
+
+<div id="alarm">
+    <li>
+        <label title="Indique si un envoie est déclenché lorsque l'alarme est activée" id="name">Transmettre début alarme</label>
+        <input id="alarmset" type="checkbox" name"gender" value="1">
+    </li>
+    <li>
+        <label title="Indique si un envoie est déclenché lorsque l'alarme est désactivée" id="name">Transmettre fin alarme</label>
+        <input id="alarmcleared" type="checkbox" name"gender" value="1">
+    </li>
+    <li>
+        <label title="" id="name">Threshold Set per minute</label>
+        <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>
+        <label id="value"></label>
+    </li>
+    <li>
+        <label title="" id="name">Threshold Clear per minute</label>
+        <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>
+        <label id="value"></label>
+    </li>
+</div>
+<hr>
