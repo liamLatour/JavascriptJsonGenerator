@@ -8,162 +8,172 @@
 </head>
 <body>
 
-    <div class="content" align="center">
-        <ul class="form-style-1">
-            <!--General-->
-                <h2>General</h2>
-            <li>
-                <label id="name">Nom du noeud</label>
-                <input id="nom" type="text"/>
-            </li>
-            <li>
-                <label id="name">Verbose</label>
-                <input id="verbose" type="checkbox" name"gender" value="1"> 
-            </li>
-            <li>
-                <label id="name">LED</label>
-                <input id="led" type="checkbox" name"gender" value="1" checked="checked">        
-            </li>
-            <li>
-                <label id="name">Watchdog</label>
-                <input id="watchdog" type="checkbox" name"gender" value="1">        
-            </li>
-            <li>
-                <label id="name">Debug en Série</label>
-                <input id="debug" type="checkbox" name"gender" value="1">        
-            </li>
+    <ul class="form-style-1">
+        <!--General-->
+            <h2>General</h2>
+        <li>
+            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud</label>
+            <input id="nom" type="text"/>
+        </li>
+        <li>
+            <label title="Définit la quantité de messages retourné par le noeud
+                   (cocher = plus de messages)" id="name">Verbose</label>
+            <input id="verbose" type="checkbox" name"gender" value="1"> 
+        </li>
+        <li>
+            <label title="Active ou non les LEDs internes" id="name">LED</label>
+            <input id="led" type="checkbox" name"gender" value="1">        
+        </li>
+        <li>
+            <label title="Dispositif pour empêcher le plantage du noeud en le remettant à zéro" id="name">Watchdog</label>
+            <input id="watchdog" type="checkbox" name"gender" value="1" checked="checked">        
+        </li>
+        <li>
+            <label title="Active ou non la sortie de débogage du noeud" id="name">Debug en Série</label>
+            <input id="debug" type="checkbox" name"gender" value="1">        
+        </li>
 
-            <!--Network-->
-            <h2>Réseau</h2>
-            <li>
-                <label id="name">Type de réseau</label>
-                <input id="typenet" type="text" value="LoRaWAN"/>
-            </li>
-            <li>
-                <label id="name">DevEUI</label>
-                <input id="deveui" type="text"/>
-            </li>
-            <li>
-                <label id="name">AppEUI</label>
-                <input id="appeui" type="text"/>
-            </li>
-            <li>
-                <label id="name">AppKey</label>
-                <input id="appkey" type="text"/>
-            </li>
-            <li>
-                <label id="name">Période en Seconde</label>
-                <input id="periodsec" type="range" min="3600" max="36000" value="1200" oninput="updateTextInput(this);"/>
-                <label id="value">1200</label>
-            </li>
-            <li>
-                <label id="name">Utiliser un DataRate adaptatif</label>
-                <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);">        
-            </li>
-            <li id="data">
-                <label id="name">DataRate</label>
-                <input id="datarate" type="range" min="1" max="20" value="10" oninput="updateTextInput(this);"/>
-                <label id="value">10</label>
-            </li>
+        <!--Network-->
+        <h2>Réseau</h2>
+        <li>
+            <label title="Indique le type de réseau utilisé" id="name">Type de réseau</label>
+            <input id="typenet" type="text" value="LoRaWAN"/>
+        </li>
+        <li>
+            <label title="Identifiant unique du noeud" id="name">DevEUI</label>
+            <input id="deveui" type="text"/>
+        </li>
+        <li>
+            <label title="Identifiant d'application" id="name">AppEUI</label>
+            <input id="appeui" type="text"/>
+        </li>
+        <li>
+            <label title="Clef d'authentification auprès de l'application" id="name">AppKey</label>
+            <input id="appkey" type="text"/>
+        </li>
+        <li>
+            <label title="Temps entre deux envoies" id="name">Intervalle d'émission</label>
+            <input id="periodsec" type="range" min="3600" max="36000" value="1200" oninput="updateTextInput(this);"/>
+            <label id="value">1200</label>
+        </li>
+        <li>
+            <label title="Ajuste automatiquement le datarate" id="name">Utiliser un DataRate adaptatif</label>
+            <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);">        
+        </li>
+        <li id="data">
+            <label title="Indique le datarate à utiliser" id="name">DataRate</label>
+            <input id="datarate" type="range" min="1" max="20" value="10" oninput="updateDatarateSlider(this);"/>
+            <label id="value">10</label>
+        </li>
 
-            <!--Sensors-->
-            <h2>Sensors</h2>
-            <div id="sensors">
+        <!--Sensors-->
+        <h2>Capteurs</h2>
+        <div id="sensors">
 
-            </div>
-            <li>
+        </div>
+        <li>
+            <div align="center">
                 <button type="button" onclick="addSens()">+</button>
-                <button type="button" onclick="supSens()">-</button> 
-            </li>
-
-            <!--Interupts-->
-            <h2>Interuptions</h2>
-            <div id="interuptions">
-
+                <button type="button" onclick="supSens()">-</button>
             </div>
-            <li>
+        </li>
+
+        <!--Interupts-->
+        <h2>Interruptions</h2>
+        <div id="interuptions">
+
+        </div>
+        <li>
+            <div align="center">
                 <button type="button" onclick="addInt()">+</button>
-                <button type="button" onclick="supInt()">-</button> 
-            </li>
+               <button type="button" onclick="supInt()">-</button>
+            </div>
+        </li>
 
-            <!--Time-->
-            <h2>Temps</h2>
+        <!--Time-->
+        <h2>Synchronisation du temps</h2>
+        <li>
+            <label title="Utilise la synchronisation GPS" id="name">Synchronisation GPS</label>
+            <input id="syncGPS" type="checkbox" name"gender" value="1" checked="checked" onchange="updateGPS(this);">        
+        </li>
+        <div id="GPS">
             <li>
-                <label id="name">Synchronisation GPS</label>
-                <input id="syncGPS" type="checkbox" name"gender" value="1" checked="checked" onchange="updateGPS(this);">        
+                <label title="Définit le temps d'attente maximale pour obtenir une accroche GPS" id="name">Timeout en Seconde</label>
+                <input id="timeout" type="range" min="60" max="240" value="120" oninput="updateTextInput(this);"/>
+                <label id="value">250</label>
             </li>
-            <div id="GPS">
-                <li>
-                    <label id="name">Timeout en Seconde</label>
-                    <input id="timeout" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
-                    <label id="value">250</label>
-                </li>
-                <li>
-                    <label id="name">Temps entre synchronisations</label>
-                    <input id="syncperiodsec" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
-                    <label id="value">250</label>
-                </li>
-            </div>
-            <div id="manual">
-                <li>
-                    <label id="name">Manual UTC</label>
-                    <input id="datePicker" type="date"/>
-                    <input id="settime" type="time" step="1"/>
-                </li>
-            </div>
+            <li>
+                <label title="Définit la période de resynchronisation" id="name">Temps entre deux synchronisations</label>
+                <input id="syncperiodsec" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
+                <label id="value">250</label>
+            </li>
+        </div>
+        <div id="manual">
+            <li>
+                <label title="Indiquer l'heure courante, de préférence dans le futur pour simplifier la tâche
+                Mettre une date non valide pour conserver la dernière date valide" id="name">Manual UTC</label>
+                <input id="settime" type="time" step="1"/>
+                <input id="datePicker" type="date"/>                
+            </li>
+        </div>
 
-
+        <div align="center">
             <a id="download" href="#">Générer le lien</a>
-            <div id="container"></div>
-        </ul>
-    </div>
+            <div id="container">
+
+            </div>
+        </div>
+    </ul>
 
     <script>
         //ajoute un sensor
         function addSens(){
             $('<div id="sensor" class="sens">\
                     <li>\
-                        <label id="name">Nom du capteur</label>\
+                        <label title="Nom du capteur, 15 caractères maximum et unique" id="name">Nom du capteur</label>\
                         <input id="sensname" type="text"/>\
                     </li>\
                     <li>\
-                        <label id="name">Type</label>\
+                        <label title="Type de capteur" id="name">Type</label>\
                         <input id="senstype" type="text"/>\
                     </li>\
                     <li>\
-                        <label id="name">Period en Second</label>\
-                        <input id="sensperiod" type="range" min="100" max="500" value="250" oninput="updateTextInput(this);"/>\
+                        <label title="Indique le temps à attendre entre deux mesures" id="name">Temps entre deux mesures</label>\
+                        <input id="sensperiod" type="range" min="60" max="3600" value="1800" oninput="updateTextInput(this);"/>\
                         <label id="value">250</label>\
                     </li>\
                     <li>\
-                        <label id="name">Interrupt Channel(s)</label>\
+                        <label title="Le nom doit faire partie de la liste d\'interruptions\
+\
+\
+                        Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>\
                         <input id="sensint" type="text"/>\
                     </li>\
                     <li>\
-                        <label id="name">Envoyer quand Interruption</label>\
+                        <label title="Définit s\'il faut envoyer les données après une intéruption" id="name">Transmettre après mesure</label>\
                         <input id="senssend" type="checkbox" name"gender" value="1">\
                     </li>\
                     <li>\
-                        <label id="name">Alarm</label>\
+                        <label title="Active ou pas l\'alarme" id="name">Alarm</label>\
                         <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">\
                     </li>\
                     \
                     <div id="alarm">\
                         <li>\
-                            <label id="name">Send on alarm set</label>\
+                            <label title="Indique si un envoie est déclenché lorsque l\'alarme est activée" id="name">Transmettre début alarme</label>\
                             <input id="alarmset" type="checkbox" name"gender" value="1">\
                         </li>\
                         <li>\
-                            <label id="name">Send on cleared set</label>\
+                            <label title="Indique si un envoie est déclenché lorsque l\'alarme est désactivée" id="name">Transmettre fin alarme</label>\
                             <input id="alarmcleared" type="checkbox" name"gender" value="1">\
                         </li>\
                         <li>\
-                            <label id="name">Threshold Set per minute</label>\
+                            <label title="" id="name">Threshold Set per minute</label>\
                             <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
                             <label id="value">7</label>\
                         </li>\
                         <li>\
-                            <label id="name">Threshold Clear per minute</label>\
+                            <label title="" id="name">Threshold Clear per minute</label>\
                             <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>\
                             <label id="value">7</label>\
                         </li>\
@@ -176,12 +186,12 @@
         function addInt(){
             $('<div id="int" class="interupt">\
                     <li>\
-                        <label id="name">Nom de/des interuption(s)</label>\
+                        <label title="Spécifie le(s) nom(s) des interruptions séparé par une espace" id="name">Nom de/des interuption(s)</label>\
                         <input id="intname" type="text"/>\
                     </li>\
                     <li>\
-                        <label id="name">Debounce Ms</label>\
-                        <input id="intdeb" type="range" min="10" max="1000" value="500" oninput="updateTextInput(this);"/>\
+                        <label title="Temps minimale entre deux fronts montant pour être pris en compte" id="name">Anti-rebonds</label>\
+                        <input id="intdeb" type="range" min="0" max="1000" value="0" oninput="updateTextInputMS(this);"/>\
                         <label id="value">7</label>\
                     </li>\
                     <hr>\
@@ -209,7 +219,23 @@
 
         //Pour la visualisation des sliders
         function updateTextInput(el) {
+            var brut = parseInt(el.value);
+            var heure = (brut-(brut%3600))/3600;
+            brut = brut - heure*3600;
+            var minutes = (brut-(brut%60))/60;
+            var sec = brut - minutes*60;
+
+            $(el).next().html(heure+'h '+minutes+'m '+sec+'s');
+        }
+
+        //Pour la visualisation du datarate
+        function updateDatarateSlider(el) {
             $(el).next().html(el.value);
+        }
+
+        //Pour le debounce
+        function updateTextInputMS(el){
+            $(el).next().html(el.value + 'ms');
         }
 
         //Pour la partie GPS
@@ -219,7 +245,7 @@
                 document.getElementById("GPS").style.display = 'inline';
             }
             else{
-                document.getElementById("manual").style.display = 'block';
+                document.getElementById("manual").style.display = 'inline';
                 document.getElementById("GPS").style.display = 'none';
             }
         }

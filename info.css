@@ -13,7 +13,9 @@ a:hover{
 }
 h2{
     background-color: rgb(7, 72, 156);
+    width: 100%;
     color: white;
+    text-align: center;
 }
 #settime{
     display: block;
@@ -51,28 +53,29 @@ button:active {
 }
 .form-style-1 #name{
     margin:0 0 3px 0;
+    margin-left: 20px;
     padding:0px;
-    display:inline;
+    display:inline-block;
     font-weight: bold;
-    position: absolute;
-    left: 25%;
+    text-align: left;
+    position: relative;
 }
 .form-style-1 #value{
     margin:0 0 3px 0;
+    margin-right: 20px;
     padding:0px;
-    display:inline;
+    display: block;
     font-weight: bold;
-    position: absolute;
-    right: 25%;
-    /*
-    font-weight: bold;
-    position: absolute;*/
+    float: right;
 }
 .form-style-1 input{
     margin:0 0 3px 0;
+    margin-right: 10px;
     padding:0px;
-    display:inline;
+    display: block;
     font-weight: bold;
-    position: relative;
-    left: 20%;
+    float: right;
+}
+.form-style-1 input[type="checkbox"]{
+    margin-right: 86px;
 }
