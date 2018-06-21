@@ -31,6 +31,27 @@ window.onload = function() {
         var minutes = parseInt(moment[1]);
         var seconds = parseInt(moment[2]);
 
+        //Section de vérification
+        var imperatif = document.getElementsByClassName("imp");
+        console.log(imperatif);
+
+        for(var i=0; i<imperatif.length; i++){
+            var pere = $(imperatif[i]).parent().parent();
+            var aVerifier = $(pere).find(':input').val();
+            console.log(aVerifier);
+
+            $(pere).css('color', 'black');
+
+            if($(pere).parent().css('display') != 'none' && (aVerifier == '' || aVerifier == undefined)){
+                $(pere).css('color', 'red');
+                $('html, body').animate({
+                    scrollTop: $(pere).offset().top - 50
+                }, 800);
+                return false;
+            }
+        }
+        //Fin de la vérification
+
         var obj = {"name": name, 
                     "verbose": verbose,
                     "led": led,

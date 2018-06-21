@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<!--To do:
+-Add titles for sensors
+-Change the modal into something better
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="info.css">
@@ -31,7 +35,7 @@
         <!--General-->
             <h2 class="subTitle">General</h2>
         <li>
-            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud <span>*</span></label>
+            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud <span class="imp">*</span></label>
             <input id="nom" type="text"/>
         </li>
         <li>
@@ -55,24 +59,24 @@
         <!--Network-->
         <h2 class="subTitle">Réseau</h2>
         <li>
-            <label title="Indique le type de réseau utilisé" id="name">Type de réseau <span>*</span></label>
+            <label title="Indique le type de réseau utilisé" id="name">Type de réseau <span class="imp">*</span></label>
             <input id="typenet" type="text" value="LoRaWAN"/>
         </li>
         <li>
-            <label title="Identifiant unique du noeud" id="name">DevEUI <span>*</span></label>
+            <label title="Identifiant unique du noeud" id="name">DevEUI <span class="imp">*</span></label>
             <input id="deveui" type="text"/>
         </li>
         <li>
-            <label title="Identifiant d'application" id="name">AppEUI <span>*</span></label>
+            <label title="Identifiant d'application" id="name">AppEUI <span class="imp">*</span></label>
             <input id="appeui" type="text"/>
         </li>
         <li>
-            <label title="Clef d'authentification auprès de l'application" id="name">AppKey <span>*</span></label>
+            <label title="Clef d'authentification auprès de l'application" id="name">AppKey <span class="imp">*</span></label>
             <input id="appkey" type="text"/>
         </li>
         <li>
-            <label title="Temps entre deux envoies" id="name">Intervalle d'émission <span>*</span></label>
-            <input id="periodsec" type="range" min="3600" max="36000" value="1200" oninput="updateTextInput(this);"/>
+            <label title="Temps entre deux envoies" id="name">Intervalle d'émission</label>
+            <input id="periodsec" type="range" min="3600" max="36000" value="1200" step="1800" oninput="updateTextInput(this);"/>
             <label id="value"></label>
         </li>
         <li>
@@ -123,7 +127,7 @@
             </li>
             <li>
                 <label title="Définit la période de resynchronisation" id="name">Temps entre deux synchronisations</label>
-                <input id="syncperiodsec" type="range" min="10" max="500" value="250" oninput="updateTextInput(this);"/>
+                <input id="syncperiodsec" type="range" min="86400" max="3456000" value="172800" step="86400" oninput="updateTextInput(this);"/>
                 <label id="value"></label>
             </li>
         </div>

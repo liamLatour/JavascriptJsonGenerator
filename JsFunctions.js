@@ -24,7 +24,7 @@ function includeHTML() {
 
 //ajoute un sensor
 function addSens(){
-    $('<div w3-include-html="sensor.html" id="sensor" class="sens"></div>').appendTo("#sensors");    
+    $('<div w3-include-html="sensor.html" id="sensor" class="sens"></div>').appendTo("#sensors");
     includeHTML();
 }
 
@@ -56,21 +56,30 @@ document.getElementById('datePicker').value = new Date().toDateInputValue();
 //Pour la visualisation des sliders
 function updateTextInput(el) {
     var brut = parseInt(el.value);
-    var heure = (brut-(brut%3600))/3600;
-    brut = brut - heure*3600;
+
     var minutes = (brut-(brut%60))/60;
-    var sec = brut - minutes*60;
+    brut -= minutes*60;
+
+    var heure = (minutes-(minutes%60))/60;
+    minutes -= heure*60;
+
+    var jour = (heure-(heure%24))/24;
+    heure -= jour*24;
 
     var display = "";
 
+    if(jour > 0){
+        display += jour+'j ';
+    }
     if(heure > 0){
         display += heure+'h ';
     }
     if(minutes > 0){
         display += minutes+'m ';
     }
-
-    display += sec+'s';
+    if(brut > 0){
+        display += brut+'s';
+    }    
 
     $(el).next().html(display);
 }
