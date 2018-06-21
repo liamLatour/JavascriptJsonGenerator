@@ -238,23 +238,83 @@ window.onload = function() {
                 var senssend = $(sens[i]).find('#senssend').is(":checked");
                 var sensalarm = $(sens[i]).find('#sensalarm').is(":checked"); 
                 
-                var tempobj = {"name": sensname,
-                                "type": senstype,
-                                "periodSec": sensperiod,
-                                "sendOnInterrupt": senssend
-                                };
+                if(senstype == "RainGaugeContact"){
+                    var senstickint = $(sens[i]).find("#tickInterrupt").val();
+                    var senstickdeb = $(sens[i]).find("#tickDebounceMs").val();
+                    var sensrainpertick = parseInt($(sens[i]).find('#rainMMPerTick').val());
+
+                    var tempobj = {"name": sensname,
+                                    "type": senstype,
+                                    "periodSec": sensperiod,
+                                    "tickInterrupt": senstickint,
+                                    "tickDebounceMs": senstickdeb,
+                                    "rainMMPerTick": sensrainpertick,
+                                    "sendOnInterrupt": senssend
+                                    };
+                }
+                else{
+                    var tempobj = {"name": sensname,
+                                    "type": senstype,
+                                    "periodSec": sensperiod,
+                                    "sendOnInterrupt": senssend
+                                    };
+                }
                 
                 if(sensalarm){
                     var alarmset = $(sens[i]).find('#alarmset').is(":checked");
                     var alarmcleared = $(sens[i]).find('#alarmcleared').is(":checked");
-                    var thresholdset = parseInt($(sens[i]).find('#thresholdset').val());
-                    var thresholdclear = parseInt($(sens[i]).find('#thresholdclear').val());
 
                     tempobj["alarm"] = {"sendOnAlarmSet": alarmset,
-                                        "sendOnAlarmCleared": alarmcleared,
-                                        "thresholdSetMMPerMinute": thresholdset,
-                                        "thresholdClearMMPerMinute": thresholdclear
+                                        "sendOnAlarmCleared": alarmcleared
                                         };
+
+                    if(senstype == "SHT35"){
+                        var humhighset = parseInt($(sens[i]).find('#humidityHighSetPercent').val());
+                        var humhighclear = parseInt($(sens[i]).find('#humidityHighClearPercent').val());
+                        var humlowset = parseInt($(sens[i]).find('#humidityLowSetPercent').val());
+                        var humlowclear = parseInt($(sens[i]).find('#humidityLowClearPercent').val());
+
+                        var temphighset = parseInt($(sens[i]).find('#temperatureHighSetDegC').val());
+                        var temphighclear = parseInt($(sens[i]).find('#temperatureHighClearDegC').val());
+                        var templowset = parseInt($(sens[i]).find('#temperatureLowSetDegC').val());
+                        var templowclear = parseInt($(sens[i]).find('#temperatureLowClearDegC').val());
+
+                        tempobj["alarm"].humidityHighSetPercent = humhighset;
+                        tempobj["alarm"].humidityHighClearPercent = humhighclear;
+                        tempobj["alarm"].humidityLowSetPercent = humlowset;
+                        tempobj["alarm"].humidityLowClearPercent = humlowclear;
+
+                        tempobj["alarm"].temperatureHighSetDegC = temphighset;
+                        tempobj["alarm"].temperatureHighClearDegC = temphighclear;
+                        tempobj["alarm"].temperatureLowSetDegC = templowset;
+                        tempobj["alarm"].temperatureLowClearDegC = templowclear;
+                    }
+                    else if(senstype == "LPS25"){
+                        var presshigh = parseInt($(sens[i]).find('#highThresholdHPa').val());
+                        var presslow = parseInt($(sens[i]).find('#lowThresholdHPa').val());
+
+                        tempobj["alarm"].highThresholdHPa = presshigh;
+                        tempobj["alarm"].lowThresholdHPa = presslow;
+                    }
+                    else if(senstype == "OPT3001"){
+                        var lumhigh = parseInt($(sens[i]).find('#highLimitLux').val());
+                        var lumlow = parseInt($(sens[i]).find('#lowLimitLux').val());
+
+                        tempobj["alarm"].highLimitLux = lumhigh;
+                        tempobj["alarm"].lowLimitLux = lumlow;
+                    }
+                    else if(senstype == "LIS3DH"){
+                        var detection = $(sens[i]).find('#motionDetection').is(":checked");
+
+                        tempobj["alarm"].motionDetection = detection;
+                    }
+                    else if(senstype == "RainGaugeContact"){
+                        var rainhigh = parseInt($(sens[i]).find('#thresholdSetMMPerMinute').val());
+                        var rainlow = parseInt($(sens[i]).find('#thresholdClearMMPerMinute').val());
+
+                        tempobj["alarm"].thresholdSetMMPerMinute = rainhigh;
+                        tempobj["alarm"].thresholdClearMMPerMinute = rainlow;
+                    }
                 }
 
                 if(sensint.length > 0){
@@ -268,7 +328,7 @@ window.onload = function() {
                         for(var j=0; j<sensints.length; j++){
                             tempints.push(sensints[j]);
                         }
-                        tempobj["interruptChannel"] = tempints;
+                        tempobj["interruptChannels"] = tempints;
                     }
                 }
 

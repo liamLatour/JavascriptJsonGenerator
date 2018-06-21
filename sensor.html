@@ -60,7 +60,7 @@
         <input id="tickInterrupt" type="text" list="typesInt"/>
     </li>
     <li>
-        <label title="" id="name">Temps anti-rebonds</label>
+        <label title="" id="name">Temps anti-rebonds <span>*</span></label>
         <input id="tickDebounceMs" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'ms');"/>
         <label id="value"></label>
     </li>
@@ -147,12 +147,12 @@
     <div id="OPT3001" class="hidden">
         <li>
             <label title="" id="name">Luminosité haute d'activation</label>
-            <input id="highThresholdHPa" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
+            <input id="highLimitLux" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
             <label id="value"></label>
         </li>
         <li>
             <label title="" id="name">Luminosité basse d'activation</label>
-            <input id="lowThresholdHPa" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
+            <input id="lowLimitLux" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
             <label id="value"></label>
         </li>
     </div>
@@ -160,19 +160,19 @@
     <div id="LIS3DH" class="hidden">
         <li>
             <label title="Indique si un envoie doit être déclenché lorsque du mouvement est détécté" id="name">Détéction de mouvement</label>
-            <input id="alarmcleared" type="checkbox" name"gender" value="1">
+            <input id="motionDetection" type="checkbox" name"gender" value="1">
         </li>
     </div>
     <!--RainGaugeContact-->
     <div id="RainGaugeContact" class="hidden">
         <li>
             <label title="" id="name">Quantité de pluie d'activation</label>
-            <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
+            <input id="thresholdSetMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
             <label id="value"></label>
         </li>
         <li>
             <label title="" id="name">Quantité de pluie de désactivation</label>
-            <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
+            <input id="thresholdClearMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
             <label id="value"></label>
         </li>
     </div>
