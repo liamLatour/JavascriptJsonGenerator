@@ -75,14 +75,38 @@ function updateTextInput(el) {
     $(el).next().html(display);
 }
 
-//Pour la visualisation du datarate
-function updateDatarateSlider(el) {
-    $(el).next().html(el.value);
+//Pour les options de capteurs
+function updateParams(el){
+    var type = el.value;
+
+    $(el).parent().parent().children("#alarm").children("#SHT35").css("display", "none");
+    $(el).parent().parent().children("#alarm").children("#LPS25").css("display", "none");
+    $(el).parent().parent().children("#alarm").children("#OPT3001").css("display", "none");
+    $(el).parent().parent().children("#alarm").children("#LIS3DH").css("display", "none");
+    $(el).parent().parent().children("#alarm").children("#RainGaugeContact").css("display", "none");
+    $(el).parent().parent().children("#RainGaugeContactParam").css("display", "none");
+
+    if(type == "SHT35"){
+        $(el).parent().parent().children("#alarm").children("#SHT35").css("display", "block");
+    }
+    else if(type == "LPS25"){
+        $(el).parent().parent().children("#alarm").children("#LPS25").css("display", "block");
+    }
+    else if(type == "OPT3001"){
+        $(el).parent().parent().children("#alarm").children("#OPT3001").css("display", "block");
+    }
+    else if(type == "LIS3DH"){
+        $(el).parent().parent().children("#alarm").children("#LIS3DH").css("display", "block");
+    }
+    else if(type == "RainGaugeContact"){
+        $(el).parent().parent().children("#alarm").children("#RainGaugeContact").css("display", "block");
+        $(el).parent().parent().children("#RainGaugeContactParam").css("display", "block");
+    }
 }
 
-//Pour le debounce
-function updateTextInputMS(el){
-    $(el).next().html(el.value + 'ms');
+//Pour les sliders sans temps
+function updateTextNonTime(el, unit){
+    $(el).next().html(el.value + unit);
 }
 
 //Pour la partie GPS

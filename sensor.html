@@ -4,12 +4,13 @@
 </li>
 <li>
     <label title="Type de capteur" id="name">Type <span>*</span></label>
-    <input id="senstype" type="text" list="typesSens"/>
+    <input id="senstype" type="text" list="typesSens" onchange="updateParams(this);"/>
     <datalist id="typesSens">
         <option value="SHT35">
         <option value="LPS25">
         <option value="OPT3001">
         <option value="LIS3DH">
+        <option value="RainGaugeContact">
         <!--
         <option value="SPI">
         <option value="I2C">
@@ -52,6 +53,24 @@
     <label title="Définit s'il faut envoyer les données après une intéruption" id="name">Transmettre après mesure</label>
     <input id="senssend" type="checkbox" name"gender" value="1">
 </li>
+<!--Paramètre spéciaux au RainGauge-->
+<div id="RainGaugeContactParam" class="hidden">
+    <li>
+        <label title="" id="name">Intérruption de ticks <span>*</span></label>
+        <input id="tickInterrupt" type="text" list="typesInt"/>
+    </li>
+    <li>
+        <label title="" id="name">Temps anti-rebonds</label>
+        <input id="tickDebounceMs" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'ms');"/>
+        <label id="value"></label>
+    </li>
+    <li>
+        <label title="" id="name">Quantité de pluie par tick</label>
+        <input id="rainMMPerTick" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'mm');"/>
+        <label id="value"></label>
+    </li>
+</div>
+<!--Fin des paramètres spéciaux-->
 <li>
     <label title="Active ou pas l'alarme" id="name">Alarm</label>
     <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">
@@ -66,15 +85,96 @@
         <label title="Indique si un envoie est déclenché lorsque l'alarme est désactivée" id="name">Transmettre fin alarme</label>
         <input id="alarmcleared" type="checkbox" name"gender" value="1">
     </li>
-    <li>
-        <label title="" id="name">Threshold Set per minute</label>
-        <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>
-        <label id="value"></label>
-    </li>
-    <li>
-        <label title="" id="name">Threshold Clear per minute</label>
-        <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextInput(this);"/>
-        <label id="value"></label>
-    </li>
+    <!--SHT35-->
+    <div id="SHT35" class="hidden">
+        <!--Humidité-->
+        <li>
+            <label title="" id="name">Humidité relative haute d'activation</label>
+            <input id="humidityHighSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/><!--Special function for '%'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Humidité relative haute de désactivation</label>
+            <input id="humidityHighClearPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/><!--Special function for '%'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Humidité relative basse d'activation</label>
+            <input id="humidityLowSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/><!--Special function for '%'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Humidité relative basse de désactivation</label>
+            <input id="humidityLowClearPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/><!--Special function for '%'-->
+            <label id="value"></label>
+        </li>
+        <!--Température-->
+        <li>
+            <label title="" id="name">Température haute d'activation</label>
+            <input id="temperatureHighSetDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/><!--Special function for 'C'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Température haute de désactivation</label>
+            <input id="temperatureHighClearDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/><!--Special function for 'C'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Température basse d'activation</label>
+            <input id="temperatureLowSetDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/><!--Special function for 'C'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Température basse de désactivation</label>
+            <input id="temperatureLowClearDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/><!--Special function for 'C'-->
+            <label id="value"></label>
+        </li>
+    </div>
+    <!--LPS25-->
+    <div id="LPS25" class="hidden">
+        <li>
+            <label title="" id="name">Pression haute d'activation</label>
+            <input id="highThresholdHPa" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Pa');"/><!--Special function for 'Pa'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Pression basse d'activation</label>
+            <input id="lowThresholdHPa" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Pa');"/><!--Special function for 'Pa'-->
+            <label id="value"></label>
+        </li>
+    </div>
+    <!--OPT3001-->
+    <div id="OPT3001" class="hidden">
+        <li>
+            <label title="" id="name">Luminosité haute d'activation</label>
+            <input id="highThresholdHPa" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Luminosité basse d'activation</label>
+            <input id="lowThresholdHPa" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Lux');"/><!--Special function for 'Lux'-->
+            <label id="value"></label>
+        </li>
+    </div>
+    <!--LIS3DH-->
+    <div id="LIS3DH" class="hidden">
+        <li>
+            <label title="Indique si un envoie doit être déclenché lorsque du mouvement est détécté" id="name">Détéction de mouvement</label>
+            <input id="alarmcleared" type="checkbox" name"gender" value="1">
+        </li>
+    </div>
+    <!--RainGaugeContact-->
+    <div id="RainGaugeContact" class="hidden">
+        <li>
+            <label title="" id="name">Quantité de pluie d'activation</label>
+            <input id="thresholdset" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
+            <label id="value"></label>
+        </li>
+        <li>
+            <label title="" id="name">Quantité de pluie de désactivation</label>
+            <input id="thresholdclear" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/><!--Special function for 'mm/min'-->
+            <label id="value"></label>
+        </li>
+    </div>
 </div>
 <hr>

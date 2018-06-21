@@ -21,7 +21,8 @@
                     Pour plus d'information sur un champs spécifique survolez le titre de celui-ci<br>
                     La documentation ce trouve ci-dessous:
                 </p>
-                <a href="https://mail.google.com/mail/u/0/?ui=2&ik=4a500e7d56&view=att&th=16411fcd88b72313&attid=0.1&disp=safe&zw">Documentation</a>
+                <a href="https://mail.google.com/mail/u/0/?ui=2&ik=4a500e7d56&view=att&th=16411fcd88b72313&attid=0.1&disp=safe&zw">Télécharcher</a>
+                <a href="Documentation.html">Visualiser</a>
             </div>
         </div>
     </div>
@@ -80,7 +81,7 @@
         </li>
         <li id="data">
             <label title="Indique le datarate à utiliser" id="name">DataRate</label>
-            <input id="datarate" type="range" min="0" max="5" value="5" oninput="updateDatarateSlider(this);"/>
+            <input id="datarate" type="range" min="0" max="5" value="5" oninput="updateTextNonTime(this, '');"/>
             <label id="value"></label>
         </li>
 
@@ -116,7 +117,7 @@
         </li>
         <div id="GPS">
             <li>
-                <label title="Définit le temps d'attente maximale pour obtenir une accroche GPS" id="name">Timeout en Seconde</label>
+                <label title="Définit le temps d'attente maximale pour obtenir une accroche GPS" id="name">Timeout</label>
                 <input id="timeout" type="range" min="60" max="240" value="120" oninput="updateTextInput(this);"/>
                 <label id="value"></label>
             </li>
