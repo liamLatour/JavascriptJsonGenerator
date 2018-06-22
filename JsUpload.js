@@ -36,18 +36,40 @@ b.onchange = function(event) {
             document.getElementById('timeout').value = obj["time"]["syncGPSTimeoutSec"];
             document.getElementById('syncperiodsec').value = obj["time"]["syncPeriodSec"];
 
-            //add sensors and interrupts
+            //add interrupts
             var nbint = Object.keys(obj["interruptions"]).length;
+            var names = [];
+            var debs = [];
+
             for(var i=0; i < nbint; i++){
-                var name = obj["interruptions"][i]["name"];
+                if(obj["interruptions"][i].hasOwnProperty('names')){
+                    names.push(obj["interruptions"][i]["names"]);
+                    alert(obj["interruptions"][i]["names"]);
+                }
+                else{
+                    names.push(obj["interruptions"][i]["name"]);
+                }
+
+                debs.push(obj["interruptions"][i]["debounceMS"]);
 
                 $('<div w3-include-html="interruption.html" id="int" class="interupt"></div>').appendTo("#interuptions");
                 includeHTML();
-                //Create an array to populate after
-                setTimeout(function(){ 
-                    $("#int #intname").last().val(name);
-                }, 300);
             }
+            setTimeout(function(){ 
+                for(var i=0; i < nbint; i++){
+                    $("#int #intname").eq(i).val(names[i]);
+                    $("#int #intdeb").eq(i).val(debs[i]);
+
+                    var text = $("#int #intname").eq(i).val();
+                    $("#int #intname").eq(i).val(text.replace(/,/g, " "));
+                }
+            }, 500);
+
+            //add sensors
+
+
+            
+
         };
     })(file);
 

@@ -240,7 +240,7 @@ window.onload = function() {
             }
         }
 
-        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj, null, 2));
 
         $("#generatedLink").remove();
         $('<a id="generatedLink" href="data:' + data + '" download="config.json">Télécharger JSON</a>').appendTo('#container');
