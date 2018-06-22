@@ -12,7 +12,12 @@
 </head>
 <body>
 
+
 <button id="help" type="button" onclick="document.getElementById('modal').style.display='block'">?</button>
+
+<input id="upload" type="file" accept=".json" style="opacity:0;"/>
+<div class="HideFile"><p>🡡</p></div>
+
 
     <div id="modal">
         <div class="modal-content">
@@ -136,7 +141,7 @@
                 <label title="Indiquer l'heure courante, de préférence dans le futur pour simplifier la tâche
                 Mettre une date non valide pour conserver la dernière date valide" id="name">Manual UTC</label>
                 <input id="settime" type="time" step="1"/>
-                <input id="datePicker" type="date"/>                
+                <input id="datePicker" type="date" value="0000-00-00"/> 
             </li>
         </div>
 
@@ -150,6 +155,7 @@
 
     <script src="JsFunctions.js"></script>
     <script src="JsJSONConverter.js"></script>
+    <script src="JsUpload.js"></script>
 
 </body>
 </html> 
