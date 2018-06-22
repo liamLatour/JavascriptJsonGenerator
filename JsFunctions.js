@@ -26,12 +26,18 @@ function includeHTML() {
 function addSens(){
     $('<div w3-include-html="sensor.html" id="sensor" class="sens"></div>').appendTo("#sensors");
     includeHTML();
+    setTimeout(function(){ 
+        initInputs();
+    }, 50);
 }
 
 //ajoute une interruption
 function addInt(){
     $('<div w3-include-html="interruption.html" id="int" class="interupt"></div>').appendTo("#interuptions");
     includeHTML();
+    setTimeout(function(){ 
+        initInputs();
+    }, 50);
 }
 
 //enlever un sensor
@@ -81,8 +87,35 @@ function updateTextInput(el) {
         display += brut+'s';
     }    
 
-    $(el).next().html(display);
+    $(el).next().val(display);
 }
+
+//Complément des sliders à temps
+function updateSliderInput(el){
+    var brut = el.value.split(' ').filter(function(n){ return n != (undefined || '') });
+    var fin = 0;
+
+    for(var i=0; i<brut.length; i++){
+        var char = brut[i].split(/[0-9]/).filter(function(n){ return n != (undefined || '') });
+        var num = brut[i].replace(/[^0-9]/g, '');
+
+        if(char == 'j'){
+            fin += num*86400;
+        }
+        else if(char == 'h'){
+            fin += num*3600;
+        }
+        else if(char == 'm'){
+            fin += num*60;
+        }
+        else if(char == 's'){
+            fin += num;
+        }
+    }
+
+    $(el).prev().val(fin);
+}
+
 
 //Pour les options de capteurs
 function updateParams(el){
@@ -119,7 +152,12 @@ function updateParams(el){
 
 //Pour les sliders sans temps
 function updateTextNonTime(el, unit){
-    $(el).next().html(el.value + unit);
+    $(el).next().val(el.value + unit);
+}
+
+//Complément des sliders sans temps
+function updateSliderNonTime(el){
+    $(el).prev().val(el.value.replace(/[^0-9]/g, ''));
 }
 
 //Shows the value of the sliders on start

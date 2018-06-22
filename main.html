@@ -83,7 +83,7 @@
         <li>
             <label title="Temps entre deux envoies" id="name">Intervalle d'émission</label>
             <input id="periodsec" type="range" min="3600" max="36000" value="1200" step="1800" oninput="updateTextInput(this);"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
         </li>
         <li>
             <label title="Ajuste automatiquement le datarate" id="name">Utiliser un DataRate adaptatif</label>
@@ -92,7 +92,7 @@
         <li id="data">
             <label title="Indique le datarate à utiliser" id="name">DataRate</label>
             <input id="datarate" type="range" min="0" max="5" value="5" oninput="updateTextNonTime(this, '');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
 
         <!--Sensors-->
@@ -129,12 +129,12 @@
             <li>
                 <label title="Définit le temps d'attente maximale pour obtenir une accroche GPS" id="name">Timeout</label>
                 <input id="timeout" type="range" min="60" max="240" value="120" oninput="updateTextInput(this);"/>
-                <label id="value"></label>
+                <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
             </li>
             <li>
                 <label title="Définit la période de resynchronisation" id="name">Temps entre deux synchronisations</label>
                 <input id="syncperiodsec" type="range" min="86400" max="3456000" value="172800" step="86400" oninput="updateTextInput(this);"/>
-                <label id="value"></label>
+                <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
             </li>
         </div>
         <div id="manual">

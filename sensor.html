@@ -27,7 +27,7 @@
 <li>
     <label title="Indique le temps à attendre entre deux mesures" id="name">Temps entre deux mesures</label>
     <input id="sensperiod" type="range" min="60" max="7200" value="1800" step="60" oninput="updateTextInput(this);"/>
-    <label id="value"></label>
+    <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
 </li>
 <li>
     <label title="Le nom doit faire partie de la liste d'interruptions
@@ -62,12 +62,12 @@
     <li>
         <label title="" id="name">Temps anti-rebonds</label>
         <input id="tickDebounceMs" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'ms');"/>
-        <label id="value"></label>
+        <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
     </li>
     <li>
         <label title="" id="name">Quantité de pluie par tick</label>
         <input id="rainMMPerTick" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'mm');"/>
-        <label id="value"></label>
+        <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
     </li>
 </div>
 <!--Fin des paramètres spéciaux-->
@@ -91,43 +91,43 @@
         <li>
             <label title="" id="name">Humidité relative haute d'activation</label>
             <input id="humidityHighSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Humidité relative haute de désactivation</label>
             <input id="humidityHighClearPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Humidité relative basse d'activation</label>
             <input id="humidityLowSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Humidité relative basse de désactivation</label>
             <input id="humidityLowClearPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <!--Température-->
         <li>
             <label title="" id="name">Température haute d'activation</label>
             <input id="temperatureHighSetDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Température haute de désactivation</label>
             <input id="temperatureHighClearDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Température basse d'activation</label>
             <input id="temperatureLowSetDegC" type="range" min="-40" max="40" value="0" oninput="updateTextNonTime(this, 'C°');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Température basse de désactivation</label>
             <input id="temperatureLowClearDegC" type="range" min="-40" max="40" value="0" oninput="updateTextNonTime(this, 'C°');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
     </div>
     <!--LPS25-->
@@ -135,12 +135,12 @@
         <li>
             <label title="" id="name">Pression haute d'activation</label>
             <input id="highThresholdHPa" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Pa');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Pression basse d'activation</label>
             <input id="lowThresholdHPa" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Pa');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
     </div>
     <!--OPT3001-->
@@ -148,12 +148,12 @@
         <li>
             <label title="" id="name">Luminosité haute d'activation</label>
             <input id="highLimitLux" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Lux');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Luminosité basse d'activation</label>
             <input id="lowLimitLux" type="range" min="500" max="2000" value="1024" oninput="updateTextNonTime(this, 'Lux');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
     </div>
     <!--LIS3DH-->
@@ -168,12 +168,12 @@
         <li>
             <label title="" id="name">Quantité de pluie d'activation</label>
             <input id="thresholdSetMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <li>
             <label title="" id="name">Quantité de pluie de désactivation</label>
             <input id="thresholdClearMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/>
-            <label id="value"></label>
+            <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
     </div>
 </div>

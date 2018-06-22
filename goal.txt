@@ -7,6 +7,8 @@ quel champ va avec quel intitulé.
     //et les valeurs ne sont pas vérifiées non-plus (par exemple il n'est pas vérifié que les valeurs en hexadécimal
     //sont bien hexadécimales).
 
+2 bis. Vérifier que les intérruptions sont bien renseigné plus hauts
+
 3. Puisqu'il s'agit d'une application visant à faciliter au maximum la vie des utilisateurs
 il serait intéressant de remplacer le nom des types de capteurs internes par des noms plus compréhensibles.
 Ainsi LPS25 serait remplacé par "capteur de pression interne", mais toujours écrit "LPS25" dans le fichier
@@ -22,9 +24,9 @@ Mais ce point pourrait être une histoire de goûts et de couleurs.
 Le mieux serait d'avoir les deux: lorsque la valeur du champ est mise à jour alors la glissière l'est
 également, et inversement.
 
-6. Dans l'objectif d'une simplification maximale de la vie de l'utilisateur,
-il serait intéressant qu'en haut de le page il soit proposé de sélectionner le disque correspondant
-au noeud connecté à l'ordinateur (si un noeud est connecté), puis d'aller lire son fichier de configuration
-'env/config.json' pour mettre à jour la page avec sa configuration actuelle. Et lorsque le configuration
-est terminée, et que le disque correspondant au noeud a été sélectionné au début,
-la configuration serait directement écrite dans le fichier 'env/config.json' du noeud.
+    //6. Dans l'objectif d'une simplification maximale de la vie de l'utilisateur,
+    //il serait intéressant qu'en haut de le page il soit proposé de sélectionner le disque correspondant
+    //au noeud connecté à l'ordinateur (si un noeud est connecté), puis d'aller lire son fichier de configuration
+    //'env/config.json' pour mettre à jour la page avec sa configuration actuelle. Et lorsque le configuration
+    //est terminée, et que le disque correspondant au noeud a été sélectionné au début,
+    //la configuration serait directement écrite dans le fichier 'env/config.json' du noeud.

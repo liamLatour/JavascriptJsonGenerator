@@ -20,6 +20,6 @@
 <li>
     <label title="Temps minimale entre deux fronts montant pour être pris en compte" id="name">Anti-rebonds</label>
     <input id="intdeb" type="range" min="0" max="1000" value="0" oninput="updateTextNonTime(this, 'ms');"/>
-    <label id="value"></label>
+    <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
 </li>
 <hr>

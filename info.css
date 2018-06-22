@@ -1,6 +1,9 @@
 span{
     color: red;
 }
+.subSlider{
+    width: 70px;
+}
 a{
     text-decoration: none;
     padding: 14px 25px;
