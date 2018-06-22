@@ -40,10 +40,15 @@ window.onload = function() {
             var aVerifier = $(pere).find(':input').val();
             console.log(aVerifier);
 
+            $(pere).css('background-color', 'rgb(255, 255, 255)');
             $(pere).css('color', 'black');
 
             if($(pere).parent().css('display') != 'none' && (aVerifier == '' || aVerifier == undefined)){
+                $(pere).css('background-color', 'rgb(200, 200, 200)');
                 $(pere).css('color', 'red');
+
+                alert("Un champ n'est pas remplis");
+
                 $('html, body').animate({
                     scrollTop: $(pere).offset().top - 50
                 }, 800);
