@@ -10,7 +10,8 @@
     <title>Config.json</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body>
+
+<body onload="initInputs();">
 
 
 <button id="help" type="button" onclick="document.getElementById('modal').style.display='block'">?</button>
@@ -141,7 +142,7 @@
                 <label title="Indiquer l'heure courante, de préférence dans le futur pour simplifier la tâche
                 Mettre une date non valide pour conserver la dernière date valide" id="name">Manual UTC</label>
                 <input id="settime" type="time" step="1"/>
-                <input id="datePicker" type="date" value="0000-00-00"/> 
+                <input id="datePicker" type="date"/> 
             </li>
         </div>
 
@@ -154,7 +155,7 @@
     </ul>
 
     <script src="JsFunctions.js"></script>
-    <script src="JsJSONConverter.js"></script>
+    <!--<script src="JsJSONConverter.js"></script>-->
     <script src="JsUpload.js"></script>
 
 </body>

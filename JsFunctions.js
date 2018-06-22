@@ -88,6 +88,10 @@ function updateTextInput(el) {
 function updateParams(el){
     var type = el.value;
 
+    if(type == undefined){
+        type = el.val();
+    }
+
     $(el).parent().parent().children("#alarm").children("#SHT35").css("display", "none");
     $(el).parent().parent().children("#alarm").children("#LPS25").css("display", "none");
     $(el).parent().parent().children("#alarm").children("#OPT3001").css("display", "none");
@@ -116,6 +120,13 @@ function updateParams(el){
 //Pour les sliders sans temps
 function updateTextNonTime(el, unit){
     $(el).next().html(el.value + unit);
+}
+
+//Shows the value of the sliders on start
+function initInputs(){
+    $("input[type=range]").each(function() {
+        $(this).trigger("oninput");
+    });
 }
 
 //Pour la partie GPS
