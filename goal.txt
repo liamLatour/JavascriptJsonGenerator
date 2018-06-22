@@ -18,11 +18,11 @@ de configuration. OPT3001 serait le "capteur de luminosité interne", et ainsi d
 comme les "interruption associée(s)" par exemple, je ne suis pas parvenu à en saisir plusieurs au moyen
 de la liste déroulante; alors que ceci devrait pouvoir se faire (Control + clic ou Shift + clic).
 
-5. Je ne suis pas un fan des curseurs utilisés pour régler différents paramètres,
-comme les périodes par exemple. Je préférerais un champ où saisir une valeur.
-Mais ce point pourrait être une histoire de goûts et de couleurs.
-Le mieux serait d'avoir les deux: lorsque la valeur du champ est mise à jour alors la glissière l'est
-également, et inversement.
+    //5. Je ne suis pas un fan des curseurs utilisés pour régler différents paramètres,
+    //comme les périodes par exemple. Je préférerais un champ où saisir une valeur.
+    //Mais ce point pourrait être une histoire de goûts et de couleurs.
+    //Le mieux serait d'avoir les deux: lorsque la valeur du champ est mise à jour alors la glissière l'est
+    //également, et inversement.
 
     //6. Dans l'objectif d'une simplification maximale de la vie de l'utilisateur,
     //il serait intéressant qu'en haut de le page il soit proposé de sélectionner le disque correspondant
