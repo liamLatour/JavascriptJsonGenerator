@@ -1,3 +1,15 @@
+function Alert(tosay, tobe){
+    $(tobe).css('background-color', 'rgb(200, 200, 200)');
+    $(tobe).css('color', 'red');
+
+    alert(tosay);
+
+    $('html, body').animate({
+        scrollTop: $(tobe).offset().top - 50
+    }, 800);
+    return false;
+}
+
 //Genère le fichier Json dans le 'div' précedemment vide
 window.onload = function() {
     var a = document.getElementById("download");
@@ -37,22 +49,31 @@ window.onload = function() {
 
         for(var i=0; i<imperatif.length; i++){
             var pere = $(imperatif[i]).parent().parent();
+            var pereclass = $(pere).find(':input').attr('class');
             var aVerifier = $(pere).find(':input').val();
             console.log(aVerifier);
 
             $(pere).css('background-color', 'rgb(255, 255, 255)');
             $(pere).css('color', 'black');
 
-            if($(pere).parent().css('display') != 'none' && (aVerifier == '' || aVerifier == undefined)){
-                $(pere).css('background-color', 'rgb(200, 200, 200)');
-                $(pere).css('color', 'red');
-
-                alert("Un champ n'est pas remplis");
-
-                $('html, body').animate({
-                    scrollTop: $(pere).offset().top - 50
-                }, 800);
-                return false;
+            if(pereclass == undefined){
+                if($(pere).parent().css('display') != 'none' && (aVerifier == '' || aVerifier == undefined)){
+                    return Alert("Un champ n'est pas remplis", pere);
+                }
+                else if(aVerifier.length > 15){
+                    return Alert("Un champ est trop long (15 caractères maximum)", pere);
+                }
+            }
+            else if(pereclass.split(' ')[0] == "hexa"){
+                if(/^[a-fA-F0-9]+$/.test(aVerifier) == false){
+                    return Alert("Ce champ doit être en hexadecimal", pere);
+                }
+                else if(pereclass.split(' ')[1] == 'h8' && aVerifier.length != 16){
+                    return Alert("Cet identifiant n'est pas valide (trop court ou trop long)", pere);
+                }
+                else if(pereclass.split(' ')[1] == 'h16' && aVerifier.length != 32){
+                    return Alert("Cet identifiant n'est pas valide (trop court ou trop long)", pere);
+                }
             }
         }
         //Fin de la vérification
