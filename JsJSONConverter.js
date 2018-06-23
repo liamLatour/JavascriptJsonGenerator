@@ -112,16 +112,14 @@ a.onclick = function() {
             var intname = $(inters[i]).find('#intname').val();
             var intdeb = parseInt($(inters[i]).find('#intdeb').val());
 
-            var intnames = intname.split(" ");
-
-            if(intnames.length < 2){
+            if(intname.length < 2){
                 intname = translateName(intname);
                 obj["interruptions"].push({"name": intname, "debounceMs": intdeb});
             }
             else{
                 var tempobj = [];
-                for(var j=0; j<intnames.length; j++){
-                    var real = translateName(intnames[j]);
+                for(var j=0; j<intname.length; j++){
+                    var real = translateName(intname[j]);
                     tempobj.push(real);
                 }
                 obj["interruptions"].push({"names": tempobj, "debounceMs": intdeb});
@@ -221,15 +219,13 @@ a.onclick = function() {
             }
 
             if(sensint.length > 0){
-                var sensints = sensint.split(" ");
-
-                if(sensints.length < 2){
+                if(sensint.length < 2){
                     tempobj["interruptChannel"] = translateName(sensint);
                 }
                 else{
                     var tempints = [];
-                    for(var j=0; j<sensints.length; j++){
-                        var tempreal = translateName(sensints[j]);
+                    for(var j=0; j<sensint.length; j++){
+                        var tempreal = translateName(sensint[j]);
                         tempints.push(tempreal);
                     }
                     tempobj["interruptChannels"] = tempints;

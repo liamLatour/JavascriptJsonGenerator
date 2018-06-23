@@ -332,5 +332,7 @@ function dropUp(el){
     $(el).css('display', 'none');
     $(el).prev().css('display', 'block');
 
-    $(el).prev().html($(el).val().join('<br/>'));
+    if($(el).val() != undefined && $(el).val() != ''){
+        $(el).prev().html($(el).val().join('<br/>'));
+    }
 }

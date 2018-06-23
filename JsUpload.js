@@ -52,18 +52,14 @@ b.onchange = function(event) {
                     $("#int #intdeb").eq(i).val(iparams[i]["debounceMs"]);
 
                     if(iparams[i].hasOwnProperty('names')){
-                        $("#int #intname").eq(i).val(iparams[i]["names"]);
-
-                        var text = $("#int #intname").eq(i).val().split(',');
-                        var fintext = "";
-                        for(var j=0; j<text.length; j++){
-                            fintext += translateAcr(text[j]) + ' ';
+                        for(var j=0; j<iparams[i]["names"].length; j++){
+                            $("#int #intname option[value='" + translateAcr(iparams[i]['names'][j]) + "']").eq(i).prop("selected", true);
                         }
-
-                        $("#int #intname").eq(i).val(fintext);
+                        dropUp($("#int #intname").eq(i));
                     }
                     else{
-                        $("#int #intname").eq(i).val(iparams[i]['name']);
+                        $("#int #intname option[value='" + translateAcr(iparams[i]['name']) + "']").eq(i).prop("selected", true);
+                        dropUp($("#int #intname").eq(i));
                     }
                 }
             }, 500);
@@ -88,22 +84,18 @@ b.onchange = function(event) {
                     $("#sensor #sensperiod").eq(i).val(params[i]["periodSec"]);
 
                     if(params[i].hasOwnProperty('interruptChannels')){
-                        $("#sensor #sensint").eq(i).val(params[i]["interruptChannels"]);
-
-                        var text = $("#sensor #sensint").eq(i).val().split(',');
-                        var fintext = "";
-                        for(var j=0; j<text.length; j++){
-                            fintext += translateAcr(text[j]) + ' ';
+                        for(var j=0; j<params[i]["interruptChannels"].length; j++){
+                            $("#sensor #sensint option[value='" + translateAcr(params[i]['interruptChannels'][j]) + "']").eq(i).prop("selected", true);
                         }
-
-                        $("#sensor #sensint").eq(i).val(fintext);
+                        dropUp($("#sensor #sensint").eq(i));
                     }
                     else{
-                        $("#sensor #sensint").eq(i).val(translateAcr(params[i]["interruptChannel"]));
+                        $("#sensor #sensint option[value='" + translateAcr(params[i]["interruptChannel"]) + "']").eq(i).prop("selected", true);
+                        dropUp($("#sensor #sensint").eq(i));
                     }
 
-                    $("#sensor #senssend").eq(i).val(params[i]["sendOnInterrupt"]);
 
+                    $("#sensor #senssend").eq(i).val(params[i]["sendOnInterrupt"]);
 
                     if(type == "RainGaugeContact"){
                         $("#sensor #tickInterrupt").eq(i).val(translateAcr(params[i]["tickInterrupt"]));

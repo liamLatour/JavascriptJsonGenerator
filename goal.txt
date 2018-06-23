@@ -14,9 +14,9 @@ quel champ va avec quel intitulé.
     //Ainsi LPS25 serait remplacé par "capteur de pression interne", mais toujours écrit "LPS25" dans le fichier
     //de configuration. OPT3001 serait le "capteur de luminosité interne", et ainsi de suite... 
 
-4. C'est peut être moi, mais dans les champs qui permettent a priori de rentrer plusieurs valeurs,
-comme les "interruption associée(s)" par exemple, je ne suis pas parvenu à en saisir plusieurs au moyen
-de la liste déroulante; alors que ceci devrait pouvoir se faire (Control + clic ou Shift + clic).
+    //4. C'est peut être moi, mais dans les champs qui permettent a priori de rentrer plusieurs valeurs,
+    //comme les "interruption associée(s)" par exemple, je ne suis pas parvenu à en saisir plusieurs au moyen
+    //de la liste déroulante; alors que ceci devrait pouvoir se faire (Control + clic ou Shift + clic).
 
     //5. Je ne suis pas un fan des curseurs utilisés pour régler différents paramètres,
     //comme les périodes par exemple. Je préférerais un champ où saisir une valeur.

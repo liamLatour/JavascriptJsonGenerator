@@ -89,26 +89,30 @@ a:hover{
 }
 
 
-.form-style-1 select{
-    margin:0 0 3px 0;
-
-    float: right;
-    margin-right: 20px;
-
-    padding:0px;
-    display: none;
-    font-weight: bold;
-}
-.form-style-1 .select{
+.form-style-1 .select, select{
     margin:0 0 3px 0;
     
     float: right;
-    margin-right: 20px;
+    margin-right: 10px;
 
     padding:2px;
     font-weight: bold;
     font-size: 14px;
     text-align: left;
+}
+
+.form-style-1 select{
+    display: none;
+}
+
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.cf:after {
+  clear: both;
 }
 
 
