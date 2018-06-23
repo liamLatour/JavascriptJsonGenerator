@@ -7,6 +7,8 @@ function Alert(tosay, tobe){
     $('html, body').animate({
         scrollTop: $(tobe).offset().top - 50
     }, 800);
+
+    $("#generatedLink").remove();
     return false;
 }
 
@@ -73,7 +75,34 @@ a.onclick = function() {
             }
         }
     }
+
+    var INTs = document.getElementsByClassName("INT");
+    var ints = [];
+    for(var i=0; i<INTs.length; i++){
+        var val = $(INTs[i]).val();
+        if(val != undefined && val != ''){
+            for(var j=0; j<val.length; j++){
+                ints.push(val[j]);
+            }
+        }
+        else{
+            //cannot be empty
+        }
+    }
+
+    var imperatifInt = document.getElementsByClassName("impInt");
+    for(var i=0; i<imperatifInt.length; i++){
+        var val = $(imperatifInt[i]).val();
+        if(val != undefined && val != ''){
+            for(var j=0; j<val.length; j++){
+                if($.inArray(val[j], ints) == -1){
+                    return Alert(val[j]+"     n'est pas renseigné dans la liste d'intérruption", $(imperatifInt[i]).parent());
+                }
+            }
+        }
+    }
     //Fin de la vérification
+
 
     var obj = {"name": name, 
                 "verbose": verbose,

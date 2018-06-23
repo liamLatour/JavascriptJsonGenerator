@@ -1,13 +1,11 @@
-1. Celle qui est la plus visible, car d'ordre esthétique:
-les différents champs des formulaires ne sont pas bien alignés et il est parfois difficile de savoir
-quel champ va avec quel intitulé.
+    //1. Celle qui est la plus visible, car d'ordre esthétique:
+    //les différents champs des formulaires ne sont pas bien alignés et il est parfois difficile de savoir
+    //quel champ va avec quel intitulé.
 
     //2. Les vérifications sur les valeurs des paramètres sont minimales:
     //la taille maximale des champs (comme le nom du noeud par exemple limité à 15 caractères) n'est pas vérifiée
     //et les valeurs ne sont pas vérifiées non-plus (par exemple il n'est pas vérifié que les valeurs en hexadécimal
     //sont bien hexadécimales).
-
-2 bis. Vérifier que les intérruptions sont bien renseigné plus hauts
 
     //3. Puisqu'il s'agit d'une application visant à faciliter au maximum la vie des utilisateurs
     //il serait intéressant de remplacer le nom des types de capteurs internes par des noms plus compréhensibles.

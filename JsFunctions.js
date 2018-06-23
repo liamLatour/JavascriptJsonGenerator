@@ -133,6 +133,9 @@ function updateParams(el){
     $(el).parent().parent().children("#alarm").children("#LIS3DH").css("display", "none");
     $(el).parent().parent().children("#alarm").children("#RainGaugeContact").css("display", "none");
     $(el).parent().parent().children("#RainGaugeContactParam").css("display", "none");
+    $(el).parent().parent().children("#onealarm").removeClass("one");
+    $(el).parent().parent().children("#alarm").children("#oneset").addClass("one");
+    $(el).parent().parent().children("#alarm").children("#oneclear").removeClass("one");
 
     if(type == "SHT35"){
         $(el).parent().parent().children("#alarm").children("#SHT35").css("display", "block");
@@ -149,6 +152,9 @@ function updateParams(el){
     else if(type == "RainGaugeContact"){
         $(el).parent().parent().children("#alarm").children("#RainGaugeContact").css("display", "block");
         $(el).parent().parent().children("#RainGaugeContactParam").css("display", "block");
+        $(el).parent().parent().children("#onealarm").addClass("one");
+        $(el).parent().parent().children("#alarm").children("#oneset").removeClass("one");
+        $(el).parent().parent().children("#alarm").children("#oneclear").addClass("one");
     }
 }
 

@@ -1,4 +1,4 @@
-<li>
+<li class="one">
     <label title="Nom du capteur, 15 caractères maximum, il est unique" id="name">Nom du capteur <span class="imp">*</span></label>
     <input id="sensname" type="text"/>
 </li>
@@ -13,7 +13,7 @@
         <option value="Pluviomètre"/>
     </datalist>
 </li>
-<li>
+<li class="one">
     <label title="Indique le temps à attendre entre deux mesures" id="name">Temps entre deux mesures</label>
     <input id="sensperiod" type="range" min="60" max="7200" value="1800" step="60" oninput="updateTextInput(this);"/>
     <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
@@ -22,7 +22,7 @@
     <label title="Le nom doit faire partie de la liste d'interruptions
     Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>
     <button class="select" type="button" onclick="dropDown(this);">Sélectionner</button>
-    <select id="sensint" multiple onfocusout="dropUp(this);">
+    <select id="sensint" multiple onfocusout="dropUp(this);" class="impInt">
         <option value="iHumidité_température">iHumidité_température</option>
         <option value="iPression">iPression</option>
         <option value="iLuminosité">iLuminosité</option>
@@ -38,7 +38,7 @@
         <option value="INT_2">INT_2</option>
     </select>
 </li>
-<li>
+<li class="one">
     <label title="Définit s'il faut envoyer les données après une intéruption" id="name">Transmettre après mesure</label>
     <input id="senssend" type="checkbox" name"gender" value="1">
 </li>
@@ -48,7 +48,7 @@
         <label title="" id="name">Intérruption de ticks <span class="imp">*</span></label>
         <input id="tickInterrupt" type="text" list="typesInt"/>
     </li>
-    <li>
+    <li class="one">
         <label title="" id="name">Temps anti-rebonds</label>
         <input id="tickDebounceMs" type="range" min="0" max="500" value="100" oninput="updateTextNonTime(this, 'ms');"/>
         <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -60,24 +60,24 @@
     </li>
 </div>
 <!--Fin des paramètres spéciaux-->
-<li>
+<li id="onealarm">
     <label title="Active ou pas l'alarme" id="name">Alarm</label>
     <input id="sensalarm" type="checkbox" name"gender" value="1" onchange="updateSens(this);">
 </li>
 
 <div id="alarm">
-    <li>
+    <li class="one" id="oneset">
         <label title="Indique si un envoie est déclenché lorsque l'alarme est activée" id="name">Transmettre début alarme</label>
         <input id="alarmset" type="checkbox" name"gender" value="1">
     </li>
-    <li>
+    <li id="oneclear">
         <label title="Indique si un envoie est déclenché lorsque l'alarme est désactivée" id="name">Transmettre fin alarme</label>
         <input id="alarmcleared" type="checkbox" name"gender" value="1">
     </li>
     <!--SHT35-->
     <div id="SHT35" class="hidden">
         <!--Humidité-->
-        <li>
+        <li class="one">
             <label title="" id="name">Humidité relative haute d'activation</label>
             <input id="humidityHighSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -87,7 +87,7 @@
             <input id="humidityHighClearPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
-        <li>
+        <li class="one">
             <label title="" id="name">Humidité relative basse d'activation</label>
             <input id="humidityLowSetPercent" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, '%');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -98,7 +98,7 @@
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
         <!--Température-->
-        <li>
+        <li class="one">
             <label title="" id="name">Température haute d'activation</label>
             <input id="temperatureHighSetDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -108,7 +108,7 @@
             <input id="temperatureHighClearDegC" type="range" min="0" max="100" value="50" oninput="updateTextNonTime(this, 'C°');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
-        <li>
+        <li class="one">
             <label title="" id="name">Température basse d'activation</label>
             <input id="temperatureLowSetDegC" type="range" min="-40" max="40" value="0" oninput="updateTextNonTime(this, 'C°');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -121,7 +121,7 @@
     </div>
     <!--LPS25-->
     <div id="LPS25" class="hidden">
-        <li>
+        <li class="one">
             <label title="" id="name">Pression haute d'activation</label>
             <input id="highThresholdHPa" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Pa');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -134,7 +134,7 @@
     </div>
     <!--OPT3001-->
     <div id="OPT3001" class="hidden">
-        <li>
+        <li class="one">
             <label title="" id="name">Luminosité haute d'activation</label>
             <input id="highLimitLux" type="range" min="500" max="2000" value="1000" oninput="updateTextNonTime(this, 'Lux');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -147,7 +147,7 @@
     </div>
     <!--LIS3DH-->
     <div id="LIS3DH" class="hidden">
-        <li>
+        <li class="one">
             <label title="Indique si un envoie doit être déclenché lorsque du mouvement est détécté" id="name">Détéction de mouvement</label>
             <input id="motionDetection" type="checkbox" name"gender" value="1">
         </li>
@@ -159,7 +159,7 @@
             <input id="thresholdSetMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
         </li>
-        <li>
+        <li class="one">
             <label title="" id="name">Quantité de pluie de désactivation</label>
             <input id="thresholdClearMMPerMinute" type="range" min="2" max="15" value="7" oninput="updateTextNonTime(this, 'mm/min');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>

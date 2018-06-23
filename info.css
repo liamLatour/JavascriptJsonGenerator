@@ -43,7 +43,7 @@ a:hover{
 }
 #alarm{
     display: none;
-    background-color: rgb(217, 210, 255);
+    border: 2px solid rgb(105, 105, 138);
     padding: 5px;
 }
 .button{
@@ -83,9 +83,16 @@ a:hover{
     display: block;
     font-weight: bold;
     float: right;
+
 }
+.form-style-1 .one{
+    padding-top: 5px;
+    background-color: rgb(233, 233, 233);
+}
+
 .form-style-1 input[type="checkbox"]{
     margin-right: 86px;
+    margin-top: 5px;;
 }
 
 

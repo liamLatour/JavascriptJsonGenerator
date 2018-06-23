@@ -40,7 +40,7 @@
     <ul class="form-style-1">
         <!--General-->
             <h2 class="subTitle">General</h2>
-        <li>
+        <li class="one">
             <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud <span class="imp">*</span></label>
             <input id="nom" type="text"/>
         </li>
@@ -49,7 +49,7 @@
                    (cocher = plus de messages)" id="name">Verbose</label>
             <input id="verbose" type="checkbox" name"gender" value="1"> 
         </li>
-        <li>
+        <li class="one">
             <label title="Active ou non les LEDs internes" id="name">LED</label>
             <input id="led" type="checkbox" name"gender" value="1">        
         </li>
@@ -57,14 +57,14 @@
             <label title="Dispositif pour empêcher le plantage du noeud en le remettant à zéro" id="name">Watchdog</label>
             <input id="watchdog" type="checkbox" name"gender" value="1" checked="checked">        
         </li>
-        <li>
+        <li class="one">
             <label title="Active ou non la sortie de débogage du noeud" id="name">Debug en Série</label>
             <input id="debug" type="checkbox" name"gender" value="1">        
         </li>
 
         <!--Network-->
         <h2 class="subTitle">Réseau</h2>
-        <li>
+        <li class="one">
             <label title="Indique le type de réseau utilisé" id="name">Type de réseau <span class="imp">*</span></label>
             <input id="typenet" type="text" value="LoRaWAN"/>
         </li>
@@ -72,7 +72,7 @@
             <label title="Identifiant unique du noeud" id="name">DevEUI <span class="imp">*</span></label>
             <input id="deveui" type="text" class="hexa h8"/>
         </li>
-        <li>
+        <li class="one">
             <label title="Identifiant d'application" id="name">AppEUI <span class="imp">*</span></label>
             <input id="appeui" type="text" class="hexa h8"/>
         </li>
@@ -80,7 +80,7 @@
             <label title="Clef d'authentification auprès de l'application" id="name">AppKey <span class="imp">*</span></label>
             <input id="appkey" type="text" class="hexa h16"/>
         </li>
-        <li>
+        <li class="one">
             <label title="Temps entre deux envoies" id="name">Intervalle d'émission</label>
             <input id="periodsec" type="range" min="3600" max="36000" value="1200" step="1800" oninput="updateTextInput(this);"/>
             <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
@@ -89,7 +89,7 @@
             <label title="Ajuste automatiquement le datarate" id="name">Utiliser un DataRate adaptatif</label>
             <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);">        
         </li>
-        <li id="data">
+        <li id="data" class="one">
             <label title="Indique le datarate à utiliser" id="name">DataRate</label>
             <input id="datarate" type="range" min="0" max="5" value="5" oninput="updateTextNonTime(this, '');"/>
             <input type="text" class="subSlider" onchange="updateSliderNonTime(this);"/>
@@ -121,7 +121,7 @@
 
         <!--Time-->
         <h2 class="subTitle">Synchronisation du temps</h2>
-        <li>
+        <li class="one">
             <label title="Utilise la synchronisation GPS" id="name">Synchronisation GPS</label>
             <input id="syncGPS" type="checkbox" name"gender" value="1" checked="checked" onchange="updateGPS(this);">        
         </li>
@@ -131,7 +131,7 @@
                 <input id="timeout" type="range" min="60" max="240" value="120" oninput="updateTextInput(this);"/>
                 <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
             </li>
-            <li>
+            <li class="one">
                 <label title="Définit la période de resynchronisation" id="name">Temps entre deux synchronisations</label>
                 <input id="syncperiodsec" type="range" min="86400" max="3456000" value="172800" step="86400" oninput="updateTextInput(this);"/>
                 <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
