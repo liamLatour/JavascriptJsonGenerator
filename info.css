@@ -46,17 +46,17 @@ a:hover{
     background-color: rgb(217, 210, 255);
     padding: 5px;
 }
-button{
+.button{
     border: none;
     padding: 10px 15px;
     margin: 10px;
     background-color: lightgreen;
     font-size: 20px;
 }
-button:hover{
+.button:hover{
     background-color: greenyellow;
 }
-button:active{
+.button:active{
     background-color: rgb(131, 194, 37);
 }
 .form-style-1 #name{
@@ -87,6 +87,31 @@ button:active{
 .form-style-1 input[type="checkbox"]{
     margin-right: 86px;
 }
+
+
+.form-style-1 select{
+    margin:0 0 3px 0;
+
+    float: right;
+    margin-right: 20px;
+
+    padding:0px;
+    display: none;
+    font-weight: bold;
+}
+.form-style-1 .select{
+    margin:0 0 3px 0;
+    
+    float: right;
+    margin-right: 20px;
+
+    padding:2px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+}
+
+
 #help{
     position: fixed;
     margin-left: 20px;

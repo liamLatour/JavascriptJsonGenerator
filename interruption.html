@@ -1,5 +1,22 @@
 <li>
     <label title="Spécifie le(s) nom(s) des interruptions séparé par une espace" id="name">Nom de/des interuption(s) <span class="imp">*</span></label>
+    <button class="select" type="button" onclick="dropDown(this);">Sélectionner<br>hgyt<br>hgyt</button>
+    <select multiple onfocusout="dropUp(this);">
+        <option value="iHumidité_température">iHumidité_température</option>
+        <option value="iPression">iPression</option>
+        <option value="iLuminosité">iLuminosité</option>
+        <option value="iMouvement">iMouvement</option>
+        <option value="SPI">SPI</option>
+        <option value="I2C">I2C</option>
+        <option value="UART">UART</option>
+        <option value="SDI-12">SDI-12</option>
+        <option value="SDI">SDI</option>
+        <option value="OPTO1">OPTO1</option>
+        <option value="OPTO2">OPTO2</option>
+        <option value="INT_1">INT_1</option>
+        <option value="INT_2">INT_2</option>
+    </select>
+    <!--
     <input id="intname" type="text" list="types" class="more15"/>
     <datalist id="types">
         <option value="iHumidité_température">
@@ -16,6 +33,7 @@
         <option value="INT_1"> 
         <option value="INT_2">
     </datalist>
+-->
 </li>
 <li>
     <label title="Temps minimale entre deux fronts montant pour être pris en compte" id="name">Anti-rebonds</label>

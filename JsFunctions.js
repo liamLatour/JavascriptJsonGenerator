@@ -322,3 +322,15 @@ function translateAcr(name){
         return name;
     }
 }
+
+function dropDown(el){
+    $(el).css('display', 'none');
+    $(el).next().css('display', 'block');
+}
+
+function dropUp(el){
+    $(el).css('display', 'none');
+    $(el).prev().css('display', 'block');
+
+    $(el).prev().html($(el).val().join('<br/>'));
+}
