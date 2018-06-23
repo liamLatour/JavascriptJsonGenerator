@@ -44,22 +44,20 @@ a.onclick = function() {
 
     //Section de vérification
     var imperatif = document.getElementsByClassName("imp");
-    console.log(imperatif);
 
     for(var i=0; i<imperatif.length; i++){
         var pere = $(imperatif[i]).parent().parent();
         var pereclass = $(pere).find(':input').attr('class');
-        var aVerifier = $(pere).find(':input').val();
-        console.log(aVerifier);
+        var aVerifier = translateName($(pere).find(':input').val());
 
         $(pere).css('background-color', 'rgb(255, 255, 255)');
         $(pere).css('color', 'black');
 
-        if(pereclass == undefined){
+        if(pereclass == undefined || pereclass == "more15"){
             if($(pere).parent().css('display') != 'none' && (aVerifier == '' || aVerifier == undefined)){
                 return Alert("Un champ n'est pas remplis", pere);
             }
-            else if(aVerifier.length > 15){
+            else if(aVerifier.length > 15 && pereclass != "more15"){
                 return Alert("Un champ est trop long (15 caractères maximum)", pere);
             }
         }
@@ -117,12 +115,14 @@ a.onclick = function() {
             var intnames = intname.split(" ");
 
             if(intnames.length < 2){
+                intname = translateName(intname);
                 obj["interruptions"].push({"name": intname, "debounceMs": intdeb});
             }
             else{
                 var tempobj = [];
                 for(var j=0; j<intnames.length; j++){
-                    tempobj.push(intnames[j]);
+                    var real = translateName(intnames[j]);
+                    tempobj.push(real);
                 }
                 obj["interruptions"].push({"names": tempobj, "debounceMs": intdeb});
             }
@@ -135,14 +135,14 @@ a.onclick = function() {
         obj["sensors"] = [];
         for(var i=0; i<sens.length; i++){
             var sensname = $(sens[i]).find('#sensname').val();
-            var senstype = $(sens[i]).find('#senstype').val();
+            var senstype = translateName($(sens[i]).find('#senstype').val());
             var sensperiod = parseInt($(sens[i]).find('#sensperiod').val());
             var sensint = $(sens[i]).find('#sensint').val();
             var senssend = $(sens[i]).find('#senssend').is(":checked");
             var sensalarm = $(sens[i]).find('#sensalarm').is(":checked"); 
             
             if(senstype == "RainGaugeContact"){
-                var senstickint = $(sens[i]).find("#tickInterrupt").val();
+                var senstickint = translateName($(sens[i]).find("#tickInterrupt").val());
                 var senstickdeb = $(sens[i]).find("#tickDebounceMs").val();
                 var sensrainpertick = parseInt($(sens[i]).find('#rainMMPerTick').val());
 
@@ -224,12 +224,13 @@ a.onclick = function() {
                 var sensints = sensint.split(" ");
 
                 if(sensints.length < 2){
-                    tempobj["interruptChannel"] = sensint;
+                    tempobj["interruptChannel"] = translateName(sensint);
                 }
                 else{
                     var tempints = [];
                     for(var j=0; j<sensints.length; j++){
-                        tempints.push(sensints[j]);
+                        var tempreal = translateName(sensints[j]);
+                        tempints.push(tempreal);
                     }
                     tempobj["interruptChannels"] = tempints;
                 }

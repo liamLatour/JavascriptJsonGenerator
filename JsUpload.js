@@ -39,29 +39,32 @@ b.onchange = function(event) {
 
             //add interrupts
             var nbint = Object.keys(obj["interruptions"]).length;
-            var names = [];
-            var debs = [];
+            var iparams = [];
 
             for(var i=0; i < nbint; i++){
-                if(obj["interruptions"][i].hasOwnProperty('names')){
-                    names.push(obj["interruptions"][i]["names"]);
-                }
-                else{
-                    names.push(obj["interruptions"][i]["name"]);
-                }
-
-                debs.push(obj["interruptions"][i]["debounceMs"]);
-
+                iparams.push(obj["interruptions"][i]);
+                
                 $('<div w3-include-html="interruption.html" id="int" class="interupt"></div>').appendTo("#interuptions");
                 includeHTML();
             }
             setTimeout(function(){ 
                 for(var i=0; i < nbint; i++){
-                    $("#int #intname").eq(i).val(names[i]);
-                    $("#int #intdeb").eq(i).val(debs[i]);
+                    $("#int #intdeb").eq(i).val(iparams[i]["debounceMs"]);
 
-                    var text = $("#int #intname").eq(i).val();
-                    $("#int #intname").eq(i).val(text.replace(/,/g, " "));
+                    if(iparams[i].hasOwnProperty('names')){
+                        $("#int #intname").eq(i).val(iparams[i]["names"]);
+
+                        var text = $("#int #intname").eq(i).val().split(',');
+                        var fintext = "";
+                        for(var j=0; j<text.length; j++){
+                            fintext += translateAcr(text[j]) + ' ';
+                        }
+
+                        $("#int #intname").eq(i).val(fintext);
+                    }
+                    else{
+                        $("#int #intname").eq(i).val(iparams[i]['name']);
+                    }
                 }
             }, 500);
 
@@ -79,7 +82,7 @@ b.onchange = function(event) {
                 for(var i=0; i < nbsens; i++){
                     $("#sensor #sensname").eq(i).val(params[i]["name"]);
                     var type = params[i]["type"];
-                    $("#sensor #senstype").eq(i).val(type);
+                    $("#sensor #senstype").eq(i).val(translateAcr(type));
                     updateParams($("#sensor #senstype").eq(i));
 
                     $("#sensor #sensperiod").eq(i).val(params[i]["periodSec"]);
@@ -87,18 +90,23 @@ b.onchange = function(event) {
                     if(params[i].hasOwnProperty('interruptChannels')){
                         $("#sensor #sensint").eq(i).val(params[i]["interruptChannels"]);
 
-                        var text = $("#sensor #sensint").eq(i).val();
-                        $("#sensor #sensint").eq(i).val(text.replace(/,/g, " "));
+                        var text = $("#sensor #sensint").eq(i).val().split(',');
+                        var fintext = "";
+                        for(var j=0; j<text.length; j++){
+                            fintext += translateAcr(text[j]) + ' ';
+                        }
+
+                        $("#sensor #sensint").eq(i).val(fintext);
                     }
                     else{
-                        $("#sensor #sensint").eq(i).val(params[i]["interruptChannel"]);
+                        $("#sensor #sensint").eq(i).val(translateAcr(params[i]["interruptChannel"]));
                     }
 
                     $("#sensor #senssend").eq(i).val(params[i]["sendOnInterrupt"]);
 
 
                     if(type == "RainGaugeContact"){
-                        $("#sensor #tickInterrupt").eq(i).val(params[i]["tickInterrupt"]);
+                        $("#sensor #tickInterrupt").eq(i).val(translateAcr(params[i]["tickInterrupt"]));
                         $("#sensor #tickDebounceMs").eq(i).val(params[i]["tickDebounceMs"]);
                         $("#sensor #rainMMPerTick").eq(i).val(params[i]["rainMMPerTick"]);
                     }

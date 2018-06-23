@@ -5,23 +5,12 @@
 <li>
     <label title="Type de capteur" id="name">Type <span class="imp">*</span></label>
     <input id="senstype" type="text" list="typesSens" onchange="updateParams(this);"/>
-    <datalist id="typesSens">
-        <option value="SHT35">
-        <option value="LPS25">
-        <option value="OPT3001">
-        <option value="LIS3DH">
-        <option value="RainGaugeContact">
-        <!--
-        <option value="SPI">
-        <option value="I2C">
-        <option value="USART">
-        <option value="SDI12">
-        <option value="SDI">
-        <option value="OPTO1"> 
-        <option value="OPTO2">
-        <option value="INT1"> 
-        <option value="INT2">
-        -->
+    <datalist id="typesSens"/>
+        <option value="Humidité_température"/>
+        <option value="Pression"/>
+        <option value="Luminosité"/>
+        <option value="Mouvement"/>
+        <option value="Pluviomètre"/>
     </datalist>
 </li>
 <li>
@@ -32,21 +21,21 @@
 <li>
     <label title="Le nom doit faire partie de la liste d'interruptions
     Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>
-    <input id="sensint" type="text" list="typesInt"/>
+    <input id="sensint" type="text" list="typesInt" class="more15"/>
     <datalist id="typesInt">
-        <option value="SHT35_INT">
-        <option value="LPS25_INT">
-        <option value="OPT3001_INT">
-        <option value="LIS3DH_INT">
-        <option value="SPI_INT">
-        <option value="I2C_INT">
-        <option value="USART_INT">
-        <option value="SDI12_INT">
-        <option value="SDI_INT">
-        <option value="OPTO1_INT"> 
-        <option value="OPTO2_INT">
-        <option value="INT1_INT"> 
-        <option value="INT2_INT">
+        <option value="iHumidité_température">
+        <option value="iPression">
+        <option value="iLuminosité">
+        <option value="iMouvement">
+        <option value="SPI">
+        <option value="I2C">
+        <option value="UART">
+        <option value="SDI-12">
+        <option value="SDI">
+        <option value="OPTO1"> 
+        <option value="OPTO2">
+        <option value="INT_1"> 
+        <option value="INT_2">
     </datalist>
 </li>
 <li>
