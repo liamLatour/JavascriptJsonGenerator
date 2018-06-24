@@ -29,10 +29,26 @@
             <div class="modal-body">
                 <p>Les champs obligatoire sont indiqués avec une étoile rouge: <span>*</span><br>
                     Pour plus d'information sur un champs spécifique survolez le titre de celui-ci<br>
+                    Les noms des interruptions sont précédées par un <b>'i'</b><br><br>
                     La documentation ce trouve ci-dessous:
                 </p>
+            </div>
+            <div align="center">
                 <a href="https://mail.google.com/mail/u/0/?ui=2&ik=4a500e7d56&view=att&th=16411fcd88b72313&attid=0.1&disp=safe&zw">Télécharcher</a>
                 <a href="Documentation.html">Visualiser</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="alertModal">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: red;">
+                <span class="close" onclick="document.getElementById('alertModal').style.display='none'">&times;</span>
+                <h2 class="modalTitle">ERREUR</h2>
+            </div>
+            <div class="modal-body">
+                <p>
+                </p>
             </div>
         </div>
     </div>
@@ -41,8 +57,8 @@
         <!--General-->
             <h2 class="subTitle">General</h2>
         <li class="one">
-            <label title="Définit le nom du noeud, 15 caractères maximum" id="name">Nom du noeud <span class="imp">*</span></label>
-            <input id="nom" type="text"/>
+            <label title="Définit le nom du noeud" id="name">Nom du noeud <span class="imp">*</span></label>
+            <input id="nom" type="text" maxlength="15"/>
         </li>
         <li>
             <label title="Définit la quantité de messages retourné par le noeud
@@ -147,7 +163,7 @@
         </div>
 
         <div align="center">
-            <a id="download" href="#">Générer le lien</a>
+            <a id="download" href="#container">Générer le lien</a>
             <div id="container">
 
             </div>
@@ -157,6 +173,7 @@
     <script src="JsFunctions.js"></script>
     <script src="JsJSONConverter.js"></script>
     <script src="JsUpload.js"></script>
+    <script src="JsTranslator.js"></script>
 
 </body>
 </html> 

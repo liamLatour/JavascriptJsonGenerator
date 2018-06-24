@@ -1,17 +1,3 @@
-function Alert(tosay, tobe){
-    $(tobe).css('background-color', 'rgb(200, 200, 200)');
-    $(tobe).css('color', 'red');
-
-    alert(tosay);
-
-    $('html, body').animate({
-        scrollTop: $(tobe).offset().top - 50
-    }, 800);
-
-    $("#generatedLink").remove();
-    return false;
-}
-
 //Genère le fichier Json dans le 'div' précedemment vide
 var a = document.getElementById("download");
 a.onclick = function() {
@@ -86,7 +72,7 @@ a.onclick = function() {
             }
         }
         else{
-            //cannot be empty
+            return Alert("Ce champ ne peut être vide", $(INTs[i]).parent());
         }
     }
 
@@ -96,7 +82,7 @@ a.onclick = function() {
         if(val != undefined && val != ''){
             for(var j=0; j<val.length; j++){
                 if($.inArray(val[j], ints) == -1){
-                    return Alert(val[j]+"     n'est pas renseigné dans la liste d'intérruption", $(imperatifInt[i]).parent());
+                    return Alert("<b>"+val[j]+" </b> n'est pas renseigné dans la liste d'intérruption", $(imperatifInt[i]).parent());
                 }
             }
         }
@@ -269,5 +255,5 @@ a.onclick = function() {
 
     $("#generatedLink").remove();
     $('<a id="generatedLink" href="data:' + data + '" download="config.json">Télécharger JSON</a>').appendTo('#container');
-    return false;
+    //return false;
 }
