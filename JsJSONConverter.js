@@ -64,7 +64,12 @@ a.onclick = function() {
 
     var INTs = document.getElementsByClassName("INT");
     var ints = [];
+
     for(var i=0; i<INTs.length; i++){
+
+        $($(INTs[i]).parent()).css('background-color', 'rgb(255, 255, 255)');
+        $($(INTs[i]).parent()).css('color', 'black');
+
         var val = $(INTs[i]).val();
         if(val != undefined && val != ''){
             for(var j=0; j<val.length; j++){
@@ -77,7 +82,12 @@ a.onclick = function() {
     }
 
     var imperatifInt = document.getElementsByClassName("impInt");
+
     for(var i=0; i<imperatifInt.length; i++){
+        
+        $($(imperatifInt[i]).parent()).css('background-color', 'rgb(255, 255, 255)');
+        $($(imperatifInt[i]).parent()).css('color', 'black');
+
         var val = $(imperatifInt[i]).val();
         if(val != undefined && val != ''){
             for(var j=0; j<val.length; j++){
