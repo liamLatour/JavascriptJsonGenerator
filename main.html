@@ -102,7 +102,7 @@
         </li>
         <li>
             <label title="Ajuste automatiquement le datarate" id="name">Utiliser un DataRate adaptatif</label>
-            <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);">        
+            <input id="adaptData" type="checkbox" name"gender" value="1" onchange="updateDatarate(this);" checked="checked">
         </li>
         <li id="data" class="one">
             <label title="Indique le datarate à utiliser" id="name">DataRate</label>
@@ -129,7 +129,7 @@
         </div>
         <li>
             <div align="center">
-                <button class="button" type="button" onclick="addInt()">+</button>
+                <button id="plusInt" class="button" type="button" onclick="addInt()">+</button>
                 <button class="button" type="button" onclick="supInt()">-</button>
             </div>
         </li>
@@ -156,8 +156,8 @@
             <li>
                 <label title="Indiquer l'heure courante, de préférence dans le futur pour simplifier la tâche
                 Mettre une date non valide pour conserver la dernière date valide" id="name">Manual UTC</label>
-                <input id="settime" type="time" step="1"/>
-                <input id="datePicker" type="date"/> 
+                <input type="time" id="settime" value="00:00:00" step="1">
+                <input id="datePicker" type="date" min="00-00-0100"> 
             </li>
         </div>
 

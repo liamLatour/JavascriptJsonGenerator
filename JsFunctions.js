@@ -48,6 +48,9 @@ function supSens(){
 //enlever une interuption
 function supInt(){
     $("#interuptions #int").last().remove();
+    if(checkAvailableInts() != ""){
+        $("#plusInt").prop("disabled", false);
+    }
 }
 
 //Rempli la date au bon fuseau horaire
@@ -173,6 +176,10 @@ function initInputs(){
     $("input[type=range]").each(function() {
         $(this).trigger("oninput");
     });
+
+    $("input[type=checkbox]").each(function() {
+        $(this).trigger("onchange");
+    });
 }
 
 //Pour la partie GPS
@@ -207,7 +214,73 @@ function updateSens(el) {
     }
 }
 
+function checkAvailableInts(text){
+    var possibilities = [
+        '<option value="iHumidité_température">iHumidité_température</option>',
+        '<option value="iPression">iPression</option>',
+        '<option value="iLuminosité">iLuminosité</option>',
+        '<option value="iMouvement">iMouvement</option>',
+        '<option value="SPI">SPI</option>',
+        '<option value="I2C">I2C</option>',
+        '<option value="UART">UART</option>',
+        '<option value="SDI-12">SDI-12</option>',
+        '<option value="SDI">SDI</option>',
+        '<option value="OPTO1">OPTO1</option>',
+        '<option value="OPTO2">OPTO2</option>',
+        '<option value="INT_1">INT_1</option>',
+        '<option value="INT_2">INT_2</option>'
+        ];
+
+    var final = [
+        '<option value="iHumidité_température">iHumidité_température</option>',
+        '<option value="iPression">iPression</option>',
+        '<option value="iLuminosité">iLuminosité</option>',
+        '<option value="iMouvement">iMouvement</option>',
+        '<option value="SPI">SPI</option>',
+        '<option value="I2C">I2C</option>',
+        '<option value="UART">UART</option>',
+        '<option value="SDI-12">SDI-12</option>',
+        '<option value="SDI">SDI</option>',
+        '<option value="OPTO1">OPTO1</option>',
+        '<option value="OPTO2">OPTO2</option>',
+        '<option value="INT_1">INT_1</option>',
+        '<option value="INT_2">INT_2</option>'
+        ];
+
+    var regExp = /\>([^<]+)\</;
+
+    for(var i=0; i<possibilities.length; i++){
+        var current = regExp.exec(possibilities[i])[1];
+        var ints = document.getElementsByClassName("INT");
+
+        for(var j=0; j< ints.length; j++){
+
+            if($(ints[j]).val().indexOf(current) >= 0){
+                final = jQuery.grep(final, function(value) {
+                    return value != possibilities[i];
+                });
+            }
+        }
+    }
+
+    if(text != "" && text != undefined){
+        for(var i=0; i<possibilities.length; i++){
+            var current = regExp.exec(possibilities[i])[1];
+            if(text.indexOf(current) >= 0){
+                final.push(possibilities[i]);
+            }
+        }
+    }
+
+    return final.filter(function(n){ return n != (undefined || '') }).sort();
+}
+
 function dropDown(el){
+    if($(el).next().attr('id') == "intname"){
+        var lol = checkAvailableInts($(el).next().val());
+        $(el).next().html(lol);
+    }
+
     $(el).css('display', 'none');
     $(el).next().css('display', 'block');
 }
@@ -216,8 +289,26 @@ function dropUp(el){
     $(el).css('display', 'none');
     $(el).prev().css('display', 'block');
 
+    var remastered = [];
+
+    for(var i=0; i<$(el).val().length; i++){
+        if($(el).val()[i] != ''){
+            remastered.push($(el).val()[i]);
+        }
+    }
+    
+    $(el).val(remastered);
+
     if($(el).val() != undefined && $(el).val() != ''){
         $(el).prev().html($(el).val().join('<br/>'));
+    }
+    else{
+        $(el).prev().html("Sélectionner");
+    }
+
+    $("#plusInt").prop("disabled", false);
+    if(checkAvailableInts() == ""){
+        $("#plusInt").prop("disabled", true);
     }
 }
 

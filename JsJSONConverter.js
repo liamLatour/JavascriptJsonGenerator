@@ -22,13 +22,24 @@ a.onclick = function() {
     //récupère la date en entié puis la sépare
     var date = document.getElementById('datePicker').value.split('-');
     var year = parseInt(date[0]);
+    if(isNaN(year)) year=0;
+
     var month = parseInt(date[1]);
+    if(isNaN(month)) month=0;
+
     var day = parseInt(date[2]);
+    if(isNaN(day)) day=0;
+
     //récupère le moment exact puis le sépare
-    var moment = document.getElementById('settime').value.split(':');
+    var moment = document.getElementById("settime").value.split(':');
     var hours = parseInt(moment[0]);
+    if(isNaN(hours)) hours=0;
+
     var minutes = parseInt(moment[1]);
+    if(isNaN(minutes)) minutes=0;
+
     var seconds = parseInt(moment[2]);
+    if(isNaN(seconds)) seconds=0;
 
     //Section de vérification
     var imperatif = document.getElementsByClassName("imp");
@@ -80,7 +91,7 @@ a.onclick = function() {
             return Alert("Ce champ ne peut être vide", $(INTs[i]).parent());
         }
     }
-
+/*
     var imperatifInt = document.getElementsByClassName("impInt");
 
     for(var i=0; i<imperatifInt.length; i++){
@@ -97,6 +108,7 @@ a.onclick = function() {
             }
         }
     }
+*/
     //Fin de la vérification
 
 

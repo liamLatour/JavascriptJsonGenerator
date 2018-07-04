@@ -1,3 +1,4 @@
+<meta charset="utf-8" />
 <li class="one">
     <label title="Nom du capteur, doit être unique" id="name">Nom du capteur <span class="imp">*</span></label>
     <input id="sensname" type="text" maxlength="15"/>
@@ -19,10 +20,10 @@
     <input type="text" class="subSlider" onchange="updateSliderInput(this);"/>
 </li>
 <li class="cf">
-    <label title="Le nom doit faire partie de la liste d'interruptions
-    Séparer les différentes intéruptions par des espaces" id="name">Interruption associée(s)</label>
+    <label title="Le nom doit faire partie de la liste d'interruptions" id="name">Interruption associée(s)</label>
     <button class="select" type="button" onclick="dropDown(this);">Sélectionner</button>
     <select id="sensint" multiple onfocusout="dropUp(this);" class="impInt">
+        <option value="">Aucune</option>
         <option value="iHumidité_température">iHumidité_température</option>
         <option value="iPression">iPression</option>
         <option value="iLuminosité">iLuminosité</option>
